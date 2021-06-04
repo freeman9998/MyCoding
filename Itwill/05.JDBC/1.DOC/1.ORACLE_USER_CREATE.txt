@@ -1,0 +1,11 @@
+C:\Users\user>sqlplus /nolog
+SQL>connect sys/sys as sysdba;
+SQL>create user java identified by java;
+SQL>grant connect,resource to java;
+SQL>connect java/java;
+SQL>show user;
+
+
+
+
+

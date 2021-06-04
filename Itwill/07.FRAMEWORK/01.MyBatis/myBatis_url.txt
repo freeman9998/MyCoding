@@ -1,0 +1,8 @@
+<<DOWNLOAD>>
+http://blog.mybatis.org/
+<<DOC>>
+http://mybatis.github.io/mybatis-3/ko/
+<<MyBatis-Spring>>
+http://www.mybatis.org/spring/ko/index.html
+<<mapper plugin url>>
+https://github.com/mybatis/mybatipse

@@ -1,0 +1,12 @@
+<<team1-프로젝트>>
+https://github.com/2020-12-JAVA-BACKEND/final-project-team1-avengers.git
+<<team1-산출물>>
+https://github.com/2020-12-JAVA-BACKEND/final-project-team1-deliverables.git
+
+<<team2-프로젝트>>
+https://github.com/2020-12-JAVA-BACKEND/final-project-team2-name.git
+<<team2-산출물>>
+https://github.com/2020-12-JAVA-BACKEND/final-project-team2-deliverables.git
+
+
+

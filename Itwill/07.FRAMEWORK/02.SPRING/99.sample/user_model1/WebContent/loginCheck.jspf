@@ -1,0 +1,10 @@
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>    
+<%
+	String sUserId=(String)session.getAttribute("sUserId");
+	if(sUserId==null){
+		response.sendRedirect("user_login.jsp");
+		return;
+	}
+	com.itwill.user.User sUser=(com.itwill.user.User)session.getAttribute("sUser");
+%>  

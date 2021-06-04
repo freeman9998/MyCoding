@@ -1,0 +1,15 @@
+/*
+		GenericXmlApplicationContext applicationContext = new GenericXmlApplicationContext();
+		ConfigurableEnvironment env = applicationContext.getEnvironment();
+		env.setActiveProfiles("apacheDataSourceProfile");
+		applicationContext.load("12.spring_properties.xml");
+		applicationContext.refresh();
+		
+		ClassPathXmlApplicationContext applicationContext = 
+				new ClassPathXmlApplicationContext();
+		GenericXmlApplicationContext applicationContext = new GenericXmlApplicationContext();
+		ConfigurableEnvironment env = applicationContext.getEnvironment();
+		env.setActiveProfiles("apacheDataSourceProfile");
+		applicationContext.load("11.spring_dao.xml");
+		applicationContext.refresh();
+*/

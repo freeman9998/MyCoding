@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	h1{
+		color: blue;
+		text-align: center;
+	}
+	ul{
+	   list-style: none;
+	   padding-left: 0px;
+	}
+	div{
+		font-size: 20pt;
+	}
+	.headBackClass{
+		background-color: yellow;
+	}
+	#content{
+		display: block;
+		border: 1px solid black;
+		background-color:silver;
+		width: 900px;
+		/*
+		margin-left: 200px;
+		margin-top: 200px;
+		*/
+		margin-left: auto;
+		margin-right: auto;
+		padding: 20px 20px 20px 20px;
+	}
+	#newsDiv{
+		padding-left: 10%;
+		border: 1px solid blue;
+		font-size: 13pt;
+		background:orange; 
+	}
+	
+	
+	
+</style>
+<script type="text/javascript" src="httpRequest.js"></script>
+<script type="text/javascript">
+	function requestNews(){
+		sendRequest('07.newsTitlesXML.jsp', null, newsDisplay,'GET');
+		
+	}
+	function newsDisplay(){
+		if(xhr.readyState==4){
+			var xmlDocument = xhr.responseXML;
+			//var xmlStr = xhr.responseText;
+			var countNodeList=xmlDocument.getElementsByTagName("count");
+			var countElement =countNodeList.item(0);
+			var countTextNode =countElement.firstChild;
+			var countStr = countTextNode.nodeValue;
+			if(countStr.trim()=='0'){
+				return;
+			}
+			/*
+			javascript DOM 
+			*/
+			
+			var newsNodeList = xmlDocument.getElementsByTagName("news");
+			var html="<ul>";
+			for (var i = 0; i < newsNodeList.length; i++) {
+				/*
+				<news>
+							<title>참으로 수고 많으셨습니다</title>
+							<company>연합뉴스</company>
+							<date>2019. 3. 13 오후 2:19:26</date>
+				</news>
+				*/
+				var newsE = newsNodeList.item(i);
+				var titleNodeList = newsE.getElementsByTagName("title");
+				var titleE = titleNodeList.item(0);
+				var titleTextNode = titleE.firstChild;
+				var titleStr=titleTextNode.nodeValue;
+				var companyStr=newsE.getElementsByTagName("company")
+				               .item(0)
+				               .firstChild
+				               .nodeValue;
+				var dateStr=newsE.getElementsByTagName("date")
+				               .item(0)
+				               .firstChild
+				               .nodeValue;
+				html+="<li>"+titleStr+"["+companyStr+"("+dateStr+")]XML</li>";
+			}
+			html+="</ul>";
+			document.getElementById("newsDiv").innerHTML=html;
+			/*
+			<result>
+				<count>9</count>
+				<data>
+					<newsList>
+						<news>
+							<title>참으로 수고 많으셨습니다</title>
+							<company>연합뉴스</company>
+							<date>2019. 3. 13 오후 2:19:26</date>
+						</news>
+						<news>
+							<title>IS 60개국 테러 위협 영상 공개…한국도 포함 포토</title>
+							<company>SBS뉴스</company>
+							<date>2019. 3. 13 오후 2:19:26</date>
+						</news>
+					</newsList>
+				</data>
+			</result>
+			*/
+				
+		}
+	}
+	
+	window.onload=function(){
+		setInterval(requestNews,1000);
+		//requestNews();	
+		
+	}
+	function showNewsDiv(){
+		var newsDivE=document.getElementById('newsDiv');
+		newsDivE.style.display='block';
+	}
+	function hideNewsDiv(){
+		var newsDivE=document.getElementById('newsDiv');
+		newsDivE.style.display='none';
+	}
+	
+</script>
+</head>
+<body>
+	<div id="content">
+		<h1 class="headBackClass">
+				실시간늬우스[XML]</h1><hr/>
+		<div id="newsDiv">
+			<ul>
+				<li>뉴스1[중앙일보]2019-03-13</li>
+				<li>뉴스2[동앙일보]2019-03-13</li>
+				<li>뉴스3[조앙일보]2019-03-13</li>
+			</ul>
+		</div>
+	</div>	
+</body>
+</html>

@@ -1,0 +1,5 @@
+<<Oracle DataBase Express Edition>>
+https://www.oracle.com/database/technologies/xe-prior-releases.html
+
+<<Sql Developer>>
+https://www.oracle.com/tools/downloads/sqldev-v192-downloads.html

@@ -1,0 +1,7 @@
+<< ROOT >>
+https://docs.spring.io/spring/docs/
+
+<< spring-framework-reference >>
+https://docs.spring.io/spring/docs/4.3.13.RELEASE/spring-framework-reference/html/
+<< javadoc-api >>
+https://docs.spring.io/spring/docs/4.3.13.RELEASE/javadoc-api/

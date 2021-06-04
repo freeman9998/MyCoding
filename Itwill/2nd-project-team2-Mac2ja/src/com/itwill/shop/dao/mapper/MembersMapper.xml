@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.shop.dao.mapper.MembersMapper">
+	<resultMap type="Members" id="members_Map" autoMapping="true">
+		<result column="MEMBERS_NO" property="members_no"/>
+		<result column="MEMBERS_NAME" property="members_name"/>
+		<result column="MEMBERS_EMAIL" property="members_email"/>
+		<result column="MEMBERS_PASSWORD" property="members_password"/>
+		<result column="MEMBERS_PHONE" property="members_phone"/>
+	</resultMap>
+	
+	<resultMap type="Members" id="membersWithCartMap" autoMapping="true">
+		<result column="MEMBERS_NO" property="members_no"/>
+		<association property="members_no" javaType="Cart" autoMapping="true">
+			<result column="CART_NO" property="cartNo"/>
+		</association>
+	</resultMap>
+	
+	<resultMap type="Members" id="membersWithOrdersMap" autoMapping="true">
+		<result column="MEMBERS_NO" property="members_no"/>		
+		<collection property="members_no" ofType="Orders" javaType="java.util.List" autoMapping="true">
+			<result column="ORDERS_NO" property="orders_no"/>
+			<result column="ORDERS_DESC" property="orders_desc"/>
+			<result column="ORDERS_PRICE" property="orders_price"/>			
+		</collection>
+	</resultMap>
+	
+	<select id="findMembersByNo" parameterType="int" resultType="Members">
+		select * from members where members_no = #{members_no}
+	</select>
+	
+	<select id="findMembersById" parameterType="String" resultType="Members">
+		select * from members where members_email = #{members_email}
+	</select>
+	
+	<select id="findMembersByPassWord" parameterType="String" resultType="Members">
+		select * from members where members_password = #{members_password}
+	</select>
+	
+	<select id="findMembersLogin" parameterType="Map" resultType="Members">
+		select * from members where members_email = #{members_email} and members_password = #{members_password}
+	</select>
+	
+	<select id="findMembersByPhone" parameterType="String" resultType="Members">
+		select * from members where members_phone = #{members_phone}
+	</select>
+	
+	<select id="selectAll" resultType="Members">
+		select * from members
+	</select>
+	
+	<insert id="createMembers" parameterType="Members">
+		insert into members(members_no,members_name,members_email,members_password,members_phone) 
+		values(members_no_seq.nextval,#{members_name},#{members_email},#{members_password},#{members_phone})
+	</insert>
+	
+	<update id="updateMembers" parameterType="Members">
+		update members set Members_name=#{members_name},
+		Members_phone=#{members_phone}
+        where members_no=#{members_no}
+	</update>
+	
+	<delete id="deleteMembers" parameterType="int">
+		delete from members where members_no=#{members_no}
+	</delete>
+</mapper>

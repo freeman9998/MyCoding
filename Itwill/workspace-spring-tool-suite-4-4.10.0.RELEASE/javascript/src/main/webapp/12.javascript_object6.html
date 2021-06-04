@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="Student.js"></script>
+<script type="text/javascript">
+	
+	/****************학생객체****************/
+	var studentObject1 = new com.itwill.Student('xxx', 'KIM', 56, 78, 99);
+	var studentObject2 = new com.itwill.Student('yyy', 'LEE', 45, 67, 34);
+	var studentObject3 = new com.itwill.Student('zzz', 'SIM', 56,78, 93);
+	var studentObject4 = new com.itwill.Student('ttt', 'TIM', 99,98, 96);
+	var studentArray=[studentObject1,studentObject2,studentObject3,studentObject4];
+</script>
+</head>
+<body>
+<h1>생성자 함수5[package]</h1><hr>
+<script type="text/javascript">
+	document.write('--------------student 리스트---------------------<br>');
+	for (var i = 0; i < studentArray.length; i++) {
+		studentArray[i].calculateTot();
+		studentArray[i].calculateAvg();
+		document.write(studentArray[i].toString()+"<br>");
+	}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

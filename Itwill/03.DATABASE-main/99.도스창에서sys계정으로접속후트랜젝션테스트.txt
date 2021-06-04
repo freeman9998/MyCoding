@@ -1,0 +1,72 @@
+C:\Users\stu>sqlplus /nolog
+SQL*Plus: Release 11.2.0.2.0 Production
+Copyright (c) 1982, 2014, Oracle.  All r
+SQL> connect sys/sys as sysdba
+Connected.
+SQL> show user
+USER is "SYS"
+SQL> desc dept;
+ERROR:
+ORA-04043: object dept does not exist
+
+
+SQL> desc scott.dept
+ Name
+ -------------------------------------
+
+ DEPTNO
+ DNAME
+ LOC
+
+SQL> SELECT * FROM SCOTT.DEPT;
+
+    DEPTNO DNAME                        LOC
+---------- ---------------------------- ----------------------
+        10 ACCOUNTING                   NEW YORK
+        20 RESEARCH                     DALLAS
+        30 SALES                        CHICAGO
+        40 OPERATIONS                   BOSTON
+        90 경리과                       부산
+/*
+
+*/
+SQL> SELECT * FROM SCOTT.DEPT;
+
+    DEPTNO DNAME                        LOC
+---------- ---------------------------- ----------------------
+        10 ACCOUNTING                   NEW YORK
+        20 RESEARCH                     DALLAS
+        30 SALES                        CHICAGO
+        40 OPERATIONS                   BOSTON
+        90 경리과                       부산
+
+SQL> UPDATE SCOTT.DEPT SET LOC='부산' WHERE DEPTNO=90;
+
+1 row updated.
+
+SQL> SELECT * FROM SCOTT.DEPT;
+
+    DEPTNO DNAME                        LOC
+---------- ---------------------------- ----------------------
+        10 ACCOUNTING                   NEW YORK
+        20 RESEARCH                     DALLAS
+        30 SALES                        CHICAGO
+        40 OPERATIONS                   BOSTON
+        90 경리과                       부산
+
+SQL> SELECT * FROM SCOTT.DEPT;
+
+    DEPTNO DNAME                        LOC
+---------- ---------------------------- ----------------------
+        10 ACCOUNTING                   NEW YORK
+        20 RESEARCH                     DALLAS
+        30 SALES                        CHICAGO
+        40 OPERATIONS                   BOSTON
+        90 경리과                       부산
+        91 생산1팀                      CA
+        92 생산2팀                      CA
+        93 생산3팀                      CA
+
+8 rows selected.
+
+SQL>

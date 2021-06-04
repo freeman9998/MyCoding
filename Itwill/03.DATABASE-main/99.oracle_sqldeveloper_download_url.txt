@@ -1,0 +1,9 @@
+oracle database:
+
+http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html
+
+https://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/xe-prior-releases-5172097.html
+
+sqldeveloper:
+http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html
+

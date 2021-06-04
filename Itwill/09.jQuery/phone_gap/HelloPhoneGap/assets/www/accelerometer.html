@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Acceleration Example</title>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+	    var watchID = null;
+	    document.addEventListener("deviceready", onDeviceReady, false);
+	function onDeviceReady() {
+		var startButton=document.getElementById("startBtn");
+		startButton.addEventListener("click",startWatch,false);
+		var stopButton=document.getElementById("stopBtn");
+		stopButton.addEventListener("click",stopWatch,false);
+    }
+
+    function startWatch() {
+        var options = { frequency: 1000 };
+        watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+    }
+    function stopWatch() {
+        if (watchID) {
+            navigator.accelerometer.clearWatch(watchID);
+            watchID = null;
+        }
+    }
+    function onSuccess(acceleration) {
+        var element = document.getElementById('accelerometer');
+        element.innerHTML = 'Acceleration X: ' + acceleration.x + '<br />' +
+                            'Acceleration Y: ' + acceleration.y + '<br />' +
+                            'Acceleration Z: ' + acceleration.z + '<br />' +
+                            'Timestamp: '      + acceleration.timestamp + '<br />';
+    }
+    function onError() {
+        alert('onError!');
+    }
+    </script>
+  </head>
+  
+  <body>
+  <h1>Acceleration Example</h1>
+  <br/>
+  <br/>
+  <br/>
+  <button id="startBtn">Start Acceler</button>
+  <button id="stopBtn">Stop Acceler</button>
+  <br/>
+  <br/>
+  <br/>
+  <div id="accelerometer">Waiting for accelerometer...</div>
+  <br/>
+  <br/>
+  <br/>
+  <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+	           <ul>
+	                    <li><a href="index.html">index</a></li>
+	                    <li><a href="map.html">map</a></li>
+	                    <li><a href="compass.html">compass</a></li>
+	                    <li><a href="accelerometer.html" class="ui-btn-active">accelerometer</a></li>
+	            </ul>
+  			</div>
+        </div>
+  </body>
+</html> 

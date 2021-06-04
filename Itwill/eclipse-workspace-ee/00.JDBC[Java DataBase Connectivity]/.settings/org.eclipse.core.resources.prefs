@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//src/basic/01.address_create_drop.sql=UTF-8
+encoding//src/basic/01.address_insert_update_delete_select.sql=UTF-8
+encoding//src/dao/address/01.address_insert_update_delete_select.sql=UTF-8
+encoding//src/dao/member/member_insert_update_delete_select.sql=UTF-8
+encoding//src/dao/member/\uD68C\uC6D0\uAD00\uB9AC.ddl=UTF-8
+encoding//src/dao/student/01.student_insert_update_delete_select.sql=UTF-8

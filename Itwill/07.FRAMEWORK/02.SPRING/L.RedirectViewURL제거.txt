@@ -1,0 +1,4 @@
+RedirectView.setExposeModelAttributes(false) 로 설정 하면, 
+직접 ?test=a&test=b 붙여서 작성 하는 부분은 파라미터가 붙지만,
+ModelAndView.addObject(attributeName, attributeValue) 
+로 추가 하는 부분은 파라미터가 생략 된다.

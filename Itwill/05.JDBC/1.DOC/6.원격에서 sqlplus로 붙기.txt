@@ -1,0 +1,3 @@
+c:\>sqlplus /nolog 
+
+SQL> connect scott/tiger@(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 182.237.126.19)(PORT = 1521)) ) (CONNECT_DATA = (SID = XE) ) )

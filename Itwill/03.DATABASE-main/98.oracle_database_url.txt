@@ -1,0 +1,2 @@
+http://docs.oracle.com/
+https://docs.oracle.com/cd/E11882_01/server.112/e41084/toc.htm

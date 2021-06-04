@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.9.16.202103111701-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[true]]></enableImports>
+	<configs>
+		<config>src/main/java/com/itwill0/context/0.applicationContext.xml</config>
+		<config>src/main/java/com/itwill1/bean/create/1.bean_create.xml</config>
+		<config>src/main/java/com/itwill2/di/2.bean_dependency.xml</config>
+		<config>src/main/java/com/itwill3/dao/3.spring_datasource.xml</config>
+		<config>src/main/java/com/itwill3/dao/user/3.user_dao_jdbc.xml</config>
+	</configs>
+	<autoconfigs>
+	</autoconfigs>
+	<configSets>
+		<configSet>
+			<name><![CDATA[test]]></name>
+			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
+			<incomplete>false</incomplete>
+			<configs>
+			</configs>
+			<profiles>
+			</profiles>
+		</configSet>
+	</configSets>
+</beansProjectDescription>

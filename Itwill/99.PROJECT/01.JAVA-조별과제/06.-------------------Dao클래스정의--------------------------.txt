@@ -1,0 +1,35 @@
+/*
+1. 테이블당 기본적으로 1개의 Dao클래스작성
+2. 모든 Dao 클래스는 5개의 기본메쏘드정의
+   - insert,
+   - selectByNo or selectById
+   - selectAll
+   - updateById or updateByNo
+   - deleteById or updateByNo
+3. 각각 Dao클래스
+	ex>
+	
+	-----------------------------------------
+	public class MemberDao {
+		
+		public void insert(MemberVO m){
+			//1. Connection 얻기
+			//2. 사용
+			//3. Connection 반납
+
+		}
+		public MemberVO selectById(){}
+		public ArrayList<MemberVO> selectAll(){}
+		public void updateById(MemberVO m){}
+		public void deleteById(String id){}
+
+	}
+
+	public class ProductDao{
+		public void insert(ProductVO p){}
+		public ProductVO selectByNo(){}
+		public ArrayList<ProductVO> selectAll(){}
+		public void updateByNo(ProductVO p){}
+		public void deleteByNo(int no){}
+	}
+

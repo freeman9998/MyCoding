@@ -1,0 +1,8 @@
+2021-03-30 15:53:12,412 ERROR [main] log.HelloWorldLog4j (HelloWorldLog4j.java:13)     - start 김경호
+2021-03-30 15:53:12,419 FATAL [main] log.HelloWorldLog4j (HelloWorldLog4j.java:14)     - start 김경호
+2021-03-30 15:53:12,420 ERROR [main] log.HelloWorldLog4j (HelloWorldLog4j.java:21)     - end 김경호
+2021-03-30 15:53:12,420 FATAL [main] log.HelloWorldLog4j (HelloWorldLog4j.java:22)     - end 김경호
+2021-03-30 15:53:12,421 ERROR [main] log.HelloWorldLog4j (HelloWorldLog4j.java:13)     - start 최경녀
+2021-03-30 15:53:12,421 FATAL [main] log.HelloWorldLog4j (HelloWorldLog4j.java:14)     - start 최경녀
+2021-03-30 15:53:12,425 ERROR [main] log.HelloWorldLog4j (HelloWorldLog4j.java:21)     - end 최경녀
+2021-03-30 15:53:12,426 FATAL [main] log.HelloWorldLog4j (HelloWorldLog4j.java:22)     - end 최경녀

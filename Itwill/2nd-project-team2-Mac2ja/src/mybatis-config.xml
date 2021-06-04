@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties resource="jdbc.properties"/>
+	<typeAliases>
+		<typeAlias alias="Members" type="com.itwill.shop.domain.Members"/>
+		<typeAlias alias="Orders" type="com.itwill.shop.domain.Orders"/>
+		<typeAlias alias="Cart" type="com.itwill.shop.domain.Cart"/>
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driverClassName}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
+			</dataSource>
+			
+			<!-- 
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@182.237.126.19:1521:XE" />
+				<property name="username" value="javabackend99" />
+				<property name="password" value="javabackend99" />
+			</dataSource>
+			-->
+		</environment>
+	</environments>
+	<mappers>
+<!--
+		
+		<mapper class="com.itwill.shop.dao.mapper.OrdersDetailMapper"/>
+-->
+		<mapper class="com.itwill.shop.dao.mapper.CategoryMapper"/>
+		<mapper class="com.itwill.shop.dao.mapper.CommentsMapper"/>
+		<mapper class="com.itwill.shop.dao.mapper.CardMapper"/>
+		<mapper class="com.itwill.shop.dao.mapper.CartMapper"/>
+		<mapper class="com.itwill.shop.dao.mapper.MembersMapper"/>
+		<mapper class="com.itwill.shop.dao.mapper.AddressMapper"/>
+		<mapper class="com.itwill.shop.dao.mapper.FoodMapper"/>
+		<mapper class="com.itwill.shop.dao.mapper.OrdersMapper"/>
+	</mappers>
+</configuration>

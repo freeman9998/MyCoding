@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Compass Example</title>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    var watchID = null;
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        var startButton=document.getElementById("startBtn");
+		startButton.addEventListener("click",startWatch,false);
+		var stopButton=document.getElementById("stopBtn");
+		stopButton.addEventListener("click",stopWatch,false);
+    }
+    function startWatch() {
+        var options = { frequency: 1000 };
+        watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+    }
+    function stopWatch() {
+        if (watchID) {
+            navigator.compass.clearWatch(watchID);
+            watchID = null;
+        }
+    }
+    function onSuccess(heading) {
+        var element = document.getElementById('heading');
+        element.innerHTML = 'Heading: ' + heading.magneticHeading;
+    }
+    function onError(compassError) {
+        alert('Compass error: ' + compassError.code);
+    }
+    </script>
+  </head>
+  <body>
+  <h1>Compass Example</h1>
+  <br/>
+  <br/>
+  <br/>
+  <button id="startBtn">Start Watching</button>
+  <button id="stopBtn">Stop Watching</button>
+  <br/>
+  <br/>
+  <br/>
+  <div id="heading">Waiting for heading...</div>
+  <br/>
+  <br/>
+  <br/>
+   <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+	           <ul>
+	                    <li><a href="index.html">index</a></li>
+	                    <li><a href="map.html">map</a></li>
+	                    <li><a href="compass.html">compass</a></li>
+	                    <li><a href="accelerometer.html" class="ui-btn-active">accelerometer</a></li>
+	            </ul>
+  			</div>
+        </div>
+  </body>
+
+</html>

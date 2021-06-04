@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	a{
+		text-decoration: none;
+		cursor: pointer;
+	}
+	.suggest{
+		display: block;
+		position: absolute;
+		left:112px; 
+		top: 105x;
+		width:157px;
+		border: 1px dotted blue; 
+	}
+</style>
+<script type="text/javascript" src="httpRequest.js"></script>
+<script type="text/javascript">
+	window.onload=function(){
+		//var inputE = document.getElementsByName('keyword').item(0);
+		//var inputE = document.search.keyword;
+		var inputE = document.getElementById('keyword');
+		inputE.addEventListener('keyup', sendKeyword);
+		inputE.addEventListener('focus', sendKeyword);
+		showHideSuggestDiv(false);
+	}
+	function sendKeyword(){
+		var keyword = document.search.keyword.value.trim();
+		if(keyword==null || keyword==''){
+			showHideSuggestDiv(false);
+			return;
+		}
+		sendRequest('suggest.jsp','keyword='+keyword,displaySuggest,'GET');
+		
+	}
+	function displaySuggest(){
+		if(xhr.readyState==4){
+			/*
+			The status of the response to the request.
+			This is the HTTP result code
+			*/
+			if(xhr.status==200){
+				var resultCSV = xhr.responseText;
+				/*
+				0|
+				2|자바,자라
+				4|ajax,aja,ajax 프로그래밍,ajara
+				*/
+				var resultCSVArray = resultCSV.split('|');
+				var resultCount=resultCSVArray[0];
+				if(resultCount.trim()=='0'){
+					showHideSuggestDiv(false);
+					return;
+				}
+				var keywordArray = resultCSVArray[1].split(',');
+				var html="";
+				for (var i = 0; i < keywordArray.length; i++) {
+					var tempKeyword = keywordArray[i];
+					html+="<a href=\"javascript:select('"+tempKeyword+"');\">"+tempKeyword+"</a><br>";
+				}
+				var suggestListDivE=
+					document.getElementById('suggestList');
+				suggestListDivE.innerHTML=html;
+				showHideSuggestDiv(true);
+			}
+			
+		}
+	}
+	function select(selectKeyword){
+		document.search.keyword.value=selectKeyword;
+		showHideSuggestDiv(false);
+		
+		//document.search.submit();
+	}
+	function showHideSuggestDiv(bool){
+		var suggestDivE = document.getElementById('suggest');
+		if(bool){
+			suggestDivE.style.display='block';
+		}else{
+			suggestDivE.style.display='none';
+			
+		}
+	}
+</script>
+<script type="text/javascript">
+	
+</script>
+</head>
+<body>
+<h1>제시어</h1>
+<hr/>
+<form action="server_search.jsp" name="search">
+	<img src="http://sstatic.naver.net/search/2015/h_logo.png">
+	<input type="text" name="keyword" id="keyword"  > &nbsp;
+	<input type="submit" value="검색">
+	<div id="suggest" class="suggest">
+		<div id="suggestList">
+		</div>
+	</div>
+	<a href="javascript:select('자바');">자바</a>
+</form>
+</body>
+</html>
+
+
+

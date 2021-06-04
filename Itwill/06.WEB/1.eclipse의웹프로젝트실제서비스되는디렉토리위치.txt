@@ -1,0 +1,5 @@
+
+C:\JAVA_PYTHON\eclipse-workspaceEE\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\servletSite
+
+JSP파일이 서블릿파일로 자동생성되는위치
+C:\JAVA_PYTHON\eclipse-workspaceEE\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\jspSite\org\apache\jsp

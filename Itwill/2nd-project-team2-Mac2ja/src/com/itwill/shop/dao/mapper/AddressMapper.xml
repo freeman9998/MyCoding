@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.shop.dao.mapper.AddressMapper">
+	
+	<!--resultMap 정의-->
+	<resultMap type="com.itwill.shop.domain.Address" id="addressResultMap" autoMapping="true">
+		<result column="ADDRESS_NO" property="address_no"/>
+		<result column="ADDRESS_NAME" property="address_name"/>
+		<result column="ADDRESS_DETAIL" property="address_detail"/>
+		<result column="ADDRESS_TYPE" property="address_type"/>
+		<result column="MEMBERS_NO" property="members_no"/>
+	</resultMap>
+	
+	<!--select-->
+	<select id="findAddressByNo" parameterType="int" resultMap="addressResultMap">
+		select * from address where members_no = #{membersNo}
+	</select>
+	
+	<select id="findAddressAll" resultMap="addressResultMap">
+		select * from address
+	</select>
+	
+	<!-- insert -->
+	<insert id="insertAddress" parameterType="com.itwill.shop.domain.Address">
+		insert into address(address_no,address_name,address_detail,address_type,members_no)
+		values(Address_no_SEQ.nextval,#{address_name},#{address_detail},#{address_type},#{members_no})
+	</insert>
+	
+	<!-- update -->
+	
+	<update id="updateAddressByNo" parameterType="com.itwill.shop.domain.Address">
+	update address set address_name=#{address_name},address_detail=#{address_detail},address_type=#{address_type} where members_no =#{members_no} and address_no=#{address_no}
+	</update>
+	
+	<!-- delete -->
+	<delete id="deleteAddressByNo" parameterType="int">
+		delete from address where address_no=#{addressNo}
+	</delete>
+	
+</mapper>

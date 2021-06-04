@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis3.dao.mapper.CourseMapper">
+	<resultMap id="CourseWithStudentsResultMap" type="Course" autoMapping="true">
+		<result column="COURSE_ID" property="courseId"/>
+		<result column="COURSE_NAME" property="name"/>
+		<result column="START_DATE" property="startDate"/>
+		<result column="END_DATE" property="endDate"/>
+		<collection property="students" resultMap="com.mybatis3.dao.mapper.StudentMapper.studentResultMap">
+		</collection>
+	</resultMap>
+	<select id="findCourseByIdWithStudents"
+			parameterType="int"
+			resultMap="CourseWithStudentsResultMap">
+		select s.stud_id,s.name as student_name ,s.email,s.phone,s.dob ,
+		c.course_id,c.name as course_name ,c.description,c.start_date,c.end_date
+		from courses c
+		left outer join course_enrollment ce on c.course_id = ce.course_id
+		left outer join students s on ce.stud_id = s.stud_id
+		where c.course_id=#{courseId}
+	</select>
+
+	<insert id="createCourse" parameterType="Course">
+		<selectKey order="BEFORE" keyProperty="tutor.tutorId" resultType="int">
+			select tutor_id as tutorId from tutors where tutor_id=#{tutor.tutorId}
+		</selectKey>
+			insert into courses values(#{courseId},#{name},#{description},#{startDate},#{endDate},#{tutor.tutorId})
+	</insert>
+
+
+
+
+
+
+</mapper>

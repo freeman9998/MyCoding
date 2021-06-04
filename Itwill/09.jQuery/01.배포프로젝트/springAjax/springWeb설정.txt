@@ -1,0 +1,68 @@
+0. compiler version 설정
+	/*************************************/
+	<!-- java compiler version 설정 -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<compilerArguments>
+						<Xlint />
+					</compilerArguments>
+					<verbose>true</verbose>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+   /*************************************/
+
+1. dependency 설정
+					
+	- java version  설정:	<java.version>1.8</java.version>
+	- spring version설정:   <spring-framework.version>4.1.2.RELEASE</spring-framework.version>
+	
+	- log4j설정(log4j.xml or log4j.properties)
+		
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
+	
+2. web.xml 설정	
+	- ContextLoaderListener설정(application-config.xml)
+    - EncodingFilter설정
+	  ************************************
+			<filter>
+		    	<filter-name>encodingFilter</filter-name>
+		    	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		    	<init-param>
+		    		<param-name>encoding</param-name>
+		    		<param-value>UTF-8</param-value>
+		    	</init-param>
+		    </filter>
+		    <filter-mapping>
+		    	<filter-name>encodingFilter</filter-name>
+		    	<url-pattern>/*</url-pattern>
+		    </filter-mapping>
+	    ************************************ 
+	
+	- DispatcherServlet설정(mvc-config.xml)
+		************************************
+		    <servlet-mapping>
+		        <servlet-name>dispatcherServlet</servlet-name>
+		        <url-pattern>*.do</url-pattern>
+		        <url-pattern>/</url-pattern>
+	    	</servlet-mapping>
+		************************************   
+	
+	
+	
+	
+	
+	

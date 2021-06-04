@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- BeanNameUrlHandlerMapping -->
+	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+	<bean name="/guest_main.do" class="com.itwill.guest.controller.GuestMainController"/>
+	<bean name="/guest_list.do" class="com.itwill.guest.controller.GuestListController">
+		<property name="guestService" ref="guestService"/>
+	</bean>
+	<bean name="/guest_view.do" class="com.itwill.guest.controller.GuestViewController">
+		<property name="guestService" ref="guestService"/>
+	</bean>
+	<bean name="/guest_write_form.do" class="com.itwill.guest.controller.GuestWriteFormController"/>
+	<bean name="/guest_error.do" class="com.itwill.guest.controller.GuestErrorController"/>
+	<bean name="/guest_modify_form.do" class="com.itwill.guest.controller.GuestModifyFormController">
+		<property name="guestService" ref="guestService"/>
+	</bean>
+	<bean name="/guest_moidify_action.do" class="com.itwill.guest.controller.GuestModifyActionController">
+		<property name="guestService" ref="guestService"/>	
+	</bean>
+	<bean name="/guest_remove_action.do" class="com.itwill.guest.controller.GuestRemoveActionController">
+		<property name="guestService" ref="guestService"/>
+	</bean>
+	<bean name="/guest_write_action.do" class="com.itwill.guest.controller.GuestWriteActionController">
+		<property name="guestService" ref="guestService"/>
+	</bean>
+	
+
+</beans>

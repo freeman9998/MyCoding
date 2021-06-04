@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.shop.dao.mapper.CommentsMapper">
+
+
+       <resultMap id = "comment_Map" type="com.itwill.shop.domain.Comments" autoMapping="true">
+          <result column="COMMENTS_NO" property="comments_no"/>
+          <result column="COMMENTS_TITLE" property="comments_title"/>
+          <result column="COMMENTS_WRITER" property="comments_writer"/>
+          <result column="COMMENTS_CONTENT" property="comments_content"/>
+          <result column="COMMENTS_STAR" property="comments_star"/>
+          <result column="COMMENTS_DATE" property="comments_date"/>
+          <result column="COMMENTS_COUNT" property="comments_count"/>
+          <result column="COMMENTS_GROUP" property="comments_group"/>
+          <result column="COMMENTS_STEP" property="comments_step"/>
+          <result column="COMMENTS_DEPT" property="comments_dept"/>
+          <result column="FOOD_NO" property="food_no"/> 
+       </resultMap> 
+
+       <select id="findCommentByno" parameterType="int" resultMap="comment_Map">
+                select * from comments where comments_no =#{commentsNo} 
+       </select>
+       
+       <select id="findCommentAll" parameterType="int" resultMap="comment_Map">
+                select * from comments where food_no=#{food_no} ORDER by comments_group asc,comments_step asc
+       </select>
+       
+       <select id="findCommentIndexList" parameterType="Map" resultType="com.itwill.shop.domain.Comments">
+       	<![CDATA[		
+       			SELECT * FROM ( SELECT rownum idx, s.* FROM 
+       			( SELECT Comments_no, Comments_title, Comments_writer,Comments_content,Comments_star,Comments_date,Comments_count, Comments_group, Comments_step, Comments_dept FROM Comments where food_no=#{food_no} ORDER BY Comments_group asc, Comments_step ASC) s ) 
+       			WHERE idx >= #{startPage} AND idx <= #{endPage}
+       	]]>
+       </select>
+       
+       <select id="countCommentAll" parameterType="int" resultType="int">
+       			select count(*) from comments where food_no=#{food_no}
+       </select>
+       
+       <select id="countComment" parameterType="int" resultType="int">
+                select count(*) from comments where comments_group=#{comments_group}
+       </select>
+ 
+       <insert id="insertComments" parameterType="com.itwill.shop.domain.Comments">
+		       insert into comments(comments_no, comments_title, comments_writer, comments_content, comments_star, comments_count,
+		       comments_group, comments_step, comments_dept, food_no) values(comments_no_seq.nextval,#{comments_title},#{comments_writer},
+		       #{comments_content},#{comments_star},#{comments_count},comments_no_seq.currval,1,0,#{food_no})
+	   </insert>
+	   
+	   <insert id="insertCommentsChild" parameterType="com.itwill.shop.domain.Comments">
+		       insert into comments(comments_no, comments_title, comments_writer, comments_content, comments_star, comments_count,
+		       comments_group, comments_step, comments_dept, food_no) values(comments_no_seq.nextval,#{comments_title},#{comments_writer},
+		       #{comments_content},#{comments_star},#{comments_count},#{comments_group},#{comments_step},#{comments_dept},#{food_no})
+	   </insert>
+	   
+	   <update id="updateCommentsByNo" parameterType="com.itwill.shop.domain.Comments">
+	           update comments set comments_title=#{commentsTitle},comments_writer=#{commentsWriter},comments_content=#{commentsContent},
+	           comments_star=#{commentsStar},comments_date=#{commentsDate},comments_count=#{commentsCount},comments_group=#{commentsGroup},
+	           comments_step=#{commentsStep},comments_dept=#{commentsDept},food_no=#{foodNo} where comments_no = #{commentsNo}   
+	   </update>
+	   
+	   <delete id="deleteCommentsByNo"  parameterType="int">
+	           delete from comments where comments_no = #{commentsNo}        
+	   </delete>
+	   
+
+</mapper>

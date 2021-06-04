@@ -1,0 +1,8 @@
+1. 코딩한다.
+	Student.java
+	StudentFieldMain.java
+2. 에러잡는다.
+
+3. 주석단다.(말해본다)
+4. 강사그림본다. --> 그려본다.
+

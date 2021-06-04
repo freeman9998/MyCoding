@@ -1,0 +1,16 @@
+MS:
+http://msdn.microsoft.com/en-us/library/ie/yek4tbz0(v=vs.94).aspx
+
+w3c school:
+http://www.w3schools.com
+https://www.w3schools.com/jsref/default.asp
+mozilla  ref
+https://developer.mozilla.org
+https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference
+
+
+https://developer.mozilla.org/ko/docs/Web
+https://developer.mozilla.org/ko/docs/Web/JavaScript
+https://www.w3schools.com/jsref/default.asp
+https://www.w3.org/
+https://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/

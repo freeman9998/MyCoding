@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>javascript operator</h1><hr>
+<script type="text/javascript">
+	var str1="KIM";
+	var str2=new String("KIM");
+	console.log('typeof str1-->'+typeof str1);
+	console.log('typeof str2-->'+typeof str2);
+	if(str1==str2){
+		console.log('값이 일치(==)');
+	}
+	if(str1 === str2){
+		console.log('값과 타입이 모두일치(===)');
+	}else{
+		console.log('값과 타입이 모두가 일치안함');
+	}
+	console.log('--------------3항연산자--------------');
+	var a=12;
+	var b=20;
+	var result = (a > b)? a:b;
+	console.log('result:'+result);
+	(a>b) ? result=a : result=b;
+	console.log('result:'+result);
+	var level=-78;
+	var msg=(level > 0) ?'양수':'음수';
+	console.log('msg:'+msg);
+	console.log('------------논리형타입변경----------')
+	var numberZero=0;
+	var nullValue=null;
+	var emptyStr='';
+	var boolStr='false';
+	var str='kim';
+	
+	if(!numberZero){
+		console.log(numberZero+'[false]');
+	}
+	if(!nullValue){
+		console.log(nullValue+'[false]');
+	}
+	if(!emptyStr){
+		console.log(emptyStr+'[false]');
+	}
+	/*
+	if(boolStr){
+		console.log(boolStr+'[true]');
+	}
+	*/
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.shop.dao.mapper.CardMapper">
+	
+	<resultMap type="com.itwill.shop.domain.Card" id="cardResultMap" autoMapping="true">
+		<result column="CARD_NO" property="card_no" />
+		<result column="CARD_NUMBER" property="card_number"/>
+		<result column="CARD_NAME" property="card_name"/>
+		<result column="CARD_TYPE" property="card_type"/>
+		<result column="MEMBERS_NO" property="members_no"/>
+	</resultMap>
+	
+	<!--select-->
+	<select id="findCardByNo" parameterType="int" resultMap="cardResultMap">
+		select * from card where card_no = #{cardNo}
+	</select>
+	
+	<select id="findCardByMembersNo" parameterType="int" resultMap="cardResultMap">
+		select * from card where members_no = #{membersNo}
+	</select>
+	
+	<select id="findCardAll" resultMap="cardResultMap">
+		select * from card
+	</select>
+	
+	<!-- insert -->
+	<insert id="insertCard" parameterType="com.itwill.shop.domain.Card">
+		insert into card(card_no,card_number,card_name,card_type,members_No)
+		values(CARD_NO_SEQ.nextval,#{card_number},#{card_name},#{card_type},#{members_no})
+	</insert>
+	
+	<insert id="createCard" parameterType="com.itwill.shop.domain.Card">
+		insert into card(card_no,card_number,card_name,card_type,members_No)
+		values(CARD_NO_SEQ.nextval,#{card_number},#{card_name},#{card_type},#{members_no})
+	</insert>
+	
+	<!-- update -->
+	
+	
+	<update id="updateCardByNo" parameterType="com.itwill.shop.domain.Card">
+		update card set card_number=#{card_number},
+		card_name=#{card_name},
+		card_type=#{card_type}
+        where card_no=#{card_no}
+	</update>
+	
+	<!-- delete -->
+	<delete id="deleteCardByNo" parameterType="int">
+		delete from card where card_no=#{cardNo}
+	</delete>
+	
+</mapper>

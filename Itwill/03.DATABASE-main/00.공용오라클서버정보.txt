@@ -1,0 +1,11 @@
+접속이름   : 182.237.126.19
+유저이름   : javabackend0 ~ javabackend30
+비밀번호   : 유저이름과동일
+
+호스트이름   : 182.237.126.19
+포트         : 1521
+SID          : xe
+
+----------<<계정접속후 user password변경>>------------ 
+--alter user 유저명 identified by 바꿀패스워드;
+alter user javabackendxx identified by xxx;

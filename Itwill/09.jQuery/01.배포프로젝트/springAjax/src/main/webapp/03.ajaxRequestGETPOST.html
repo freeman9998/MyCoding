@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	var xhr=null;
+	function ajaxRequestGet(){
+		var idStr = document.getForm.id.value;
+		var getResultSpanE = document.getElementById('getResultSpan');
+		if(idStr==null || idStr.trim()==''){
+			getResultSpanE.innerHTML='';
+			return;
+		}
+		var params="id="+idStr;
+		xhr=new XMLHttpRequest();
+		xhr.open('GET', "03.ajaxRequestGETPOST.jsp?"+params);
+		xhr.onreadystatechange = getResultDisplay;
+		xhr.send(null);	
+	}
+	function getResultDisplay(){
+		var getResultSpanE = document.getElementById('getResultSpan');
+		if(xhr.readyState==4){
+			var receiveText = xhr.responseText;
+			if(receiveText.trim()=='Y'){
+				getResultSpanE.innerHTML='사용가능';
+			}else if(receiveText.trim()=='N'){
+				getResultSpanE.innerHTML='사용불가능';
+			}
+		}
+	}
+	
+	function ajaxRequestPost(){
+		
+		var idStr = document.postForm.id.value;
+		var postResultSpanE = document.getElementById('postResultSpan');
+		if(idStr==null || idStr.trim()==''){
+			postResultSpanE.innerHTML='';
+			return;
+		}
+		var params="id="+idStr;
+		xhr=new XMLHttpRequest();
+		xhr.open('POST', "03.ajaxRequestGETPOST.jsp");
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhr.onreadystatechange = postResultDisplay;
+		xhr.send(params);
+		
+		
+	}
+	function postResultDisplay(){
+		var postResultSpanE = document.getElementById('postResultSpan');
+		if(xhr.readyState==4){
+			var receiveText = xhr.responseText;
+			if(receiveText.trim()=='Y'){
+				postResultSpanE.innerHTML='사용가능';
+			}else if(receiveText.trim()=='N'){
+				postResultSpanE.innerHTML='사용불가능';
+			}
+		}
+	}
+</script>
+</head>
+<body>
+<h1>AJAX GET,POST요청</h1><hr/>
+
+<form id='getForm' name='getForm' >
+	아이디[GET]:<input type="text" name="id" 
+						onkeyup="ajaxRequestGet();">
+	<span id="getResultSpan"></span>
+</form>
+<form id='postForm' name='postForm' >
+	아이디[POST]:<input type="text" name="id" 
+						onkeyup="ajaxRequestPost();">
+	<span id="postResultSpan"></span>
+</form>
+
+
+
+</body>
+</html>

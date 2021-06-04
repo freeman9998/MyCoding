@@ -1,0 +1,12 @@
+DB DRIVER CLASS 위치
+
+*DATABASE==>
+C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib  있는 ojdbc6.jar파일을 복사해서
+*JAVA  ==>
+C:\Program Files\Java\jdk1.8.0_31\jre\lib\ext  디렉토리에 복사한다.
+
+==>C:\Program Files\Java\jdk1.8.0_101\jre\lib\ext
+   -이디렉토리에는 자바표준API가아닌 외부라이브러리
+    를 위치시킨다(자동으로찾는다).
+
+

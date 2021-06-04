@@ -1,0 +1,9 @@
+<< 11g xe에서 8080 포트 바꾸기 >>
+SQL> sqlplus /nolog
+SQL> conn sys/sys as sysdba
+
+--현재포트확인
+SQL> SELECT DBMS_XDB.GETHTTPPORT() FROM DUAL
+
+--9090포트로 변경
+SQL> EXEC DBMS_XDB.SETHTTPPORT(9090)

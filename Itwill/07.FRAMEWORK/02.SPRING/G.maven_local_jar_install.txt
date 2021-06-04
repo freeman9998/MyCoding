@@ -1,0 +1,8 @@
+console>mvn install:install-file -Dfile=summer.jar -DgroupId=itwill.summer -DartifactId=summer -Dversion=1.0.0 -Dpackaging=jar
+
+pom.xml
+<dependency>
+        <groupId>itwill.summer</groupId>
+        <artifactId>summer</artifactId>
+        <version>1.0.0</version>
+</dependency>

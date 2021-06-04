@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/*
+	생성자함수
+	*/
+	var o=new Object();
+	
+	var strObject=new String('문자열');
+	var numberObject=new Number(34);
+	var arrayObject=new Array();
+	//var studentObject=new Student();
+	/*
+	학생객체를 생성해서 반환해주는 <<< 함수 >>> 작성
+	*/
+	function Student(id,name,kor,eng,math){
+		this.id=id;
+	 	this.name=name;
+	 	this.kor=kor;
+	 	this.eng=eng;
+	 	this.math=math;
+	 	this.tot=0;
+	 	this.avg=0.0;
+	}
+	/************prototype*****************
+	Student.prototype.calculateTot=function(){
+ 			this.tot=this.kor+this.avg+this.math;
+ 	};
+	Student.prototype.calculateAvg=function(){
+		this.avg=this.tot/3;
+	};
+	Student.prototype.toString=function(){
+		return '['+this.id+']'+this.name+','+this.kor+','+this.eng+','+this.math+','+this.tot+','+this.avg;
+	}*/
+	
+	/************prototype[JSON]******************/
+	Student.prototype={
+			'calculateTot':function(){
+				this.tot=this.kor+this.avg+this.math;
+			},
+			'calculateAvg':function(){
+				this.avg=this.tot/3;
+			},
+			'toString':function(){
+				return '['+this.id+']'+this.name+','+this.kor+','+this.eng+','+this.math+','+this.tot+','+this.avg;
+			}
+	};
+	
+	
+	/****************학생객체****************/
+	var studentObject1 = new Student('xxx', 'KIM', 56, 78, 99);
+	var studentObject2 = new Student('yyy', 'LEE', 45, 67, 34);
+	var studentObject3 = new Student('zzz', 'SIM', 56,78, 93);
+	var studentArray=[studentObject1,studentObject2,studentObject3];
+</script>
+</head>
+<body>
+<h1>생성자 함수4[prototype]</h1><hr>
+<script type="text/javascript">
+	document.write('--------------student 리스트---------------------<br>');
+	for (var i = 0; i < studentArray.length; i++) {
+		studentArray[i].calculateTot();
+		studentArray[i].calculateAvg();
+		document.write(studentArray[i].toString()+"<br>");
+	}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

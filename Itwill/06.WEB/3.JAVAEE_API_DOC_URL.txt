@@ -1,0 +1,2 @@
+http://docs.oracle.com/javaee/7/api/
+https://javaee.github.io/javaee-spec/javadocs/

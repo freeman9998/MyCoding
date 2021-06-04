@@ -1,0 +1,9 @@
+ 	
+ 	public static void main(String[] args) {
+		int[] ia = new int[5];
+		ia[0]=11;
+		ia[1]=22;
+		ia[2]=33;
+		ia[3]=44;
+		ia[4]=55;
+	}	

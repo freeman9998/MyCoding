@@ -1,0 +1,5 @@
+create or replace procedure set_balance (a IN number,b IN number)
+ is
+ begin
+   update  accountA set acc_balance = b where acc_no=a;
+ end;

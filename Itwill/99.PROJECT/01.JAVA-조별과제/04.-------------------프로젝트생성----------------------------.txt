@@ -1,0 +1,42 @@
+0. 개발환경,툴 설정
+     java    version  -->java_home 설정
+     eclipse  version-->설정된 java_home
+    
+    
+
+0.공통클래스파일(설정파일)
+   	ex> 데이타베이스접속:
+            ConnectionFactory.java(db.properties)
+	    	
+1.이클립스프로젝트이름(프로젝트생성)
+2.패키지이름(패키지생성)
+3.클래스이름(생성)
+	<< member패키지 >>
+	com.itwill.shop.vo.Member.java
+	com.itwill.shop.dao.MemberDao.java
+	com.itwill.shop.service.MemberService.java
+	<< db패키지 >>
+	com.itwill.shop.dao.ConnectionFactory.java
+	
+4.UI클래스
+        << 메인프레임 >>
+       		com.itwill.shop.ui.XXXMainFrame.java
+    	<< member >>
+		com.itwill.shop.ui.member.MemberListPanel.java
+		com.itwill.shop.ui.member.MemberLoginDialog.java
+	<< product >>
+		com.itwill.shop.ui.product.ProductListPanel.java
+		com.itwill.shop.ui.product.ProductDetailPanel.java	
+	<< order>>
+		com.itwill.shop.ui.order.OrderListPanel.java
+		com.itwill.shop.ui.order.OrderDetailPanel.java
+5. 팀장님
+    - local reository 생성
+    - local reository commit 
+    - remote에 push
+
+6. 팀원
+    - clone remote repository
+    - create local repository
+    - project import
+    

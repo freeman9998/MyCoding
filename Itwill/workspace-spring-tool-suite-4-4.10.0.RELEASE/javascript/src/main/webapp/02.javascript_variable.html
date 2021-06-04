@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/*
+		변수,상수,리터럴
+	*/
+	var a1='test1';
+	var a2="test2";
+	var b=123;
+	var c=123.456
+	var d=true;
+	e = '김태희';
+	var e;
+	console.log('e-->'+e);
+	
+	var a1 ='test11';
+	//Identifier 'a1' has already been declared
+	//let a1 ='test3';
+	
+	const f='KIM';
+	//f='HIM';
+	var g;
+	var h=null;
+	
+	/*********Object************/
+	/*
+		 Object객체생성
+			1. 생성자함수
+			2. JSON(JavasScript Object Notation)
+	*/
+	 var o1 = new Object();
+	 var o2={};
+	/*********Array************/
+	/*
+		 Array 객체생성
+			1. 생성자함수
+			2. JSON(JavasScript Object Notation)
+	*/
+	var array1=new Array();
+	var array2=[];
+	
+	
+	var student = {
+			'no':1,
+			'name':'KIM'
+	};
+	
+	var nameArray=['KIM','LEE','PARK','CHOI','SIM'];
+	var scoreArray=[78,56,88,90,99];
+	console.log(nameArray[0]);
+	console.log(scoreArray[0]);
+	//자바스크립트변수의 범위는 함수에의해서만 생성된다.
+	for(var i=0;i<nameArray.length;i++){
+		console.log(nameArray[i]+"-->"+scoreArray[i]);
+	}
+	console.log("i-->"+i);
+	console.log("window.i-->"+window.i);
+	
+	console.log("--------------typeof------------");
+	console.log(typeof window.a1);
+	console.log(typeof b);
+	console.log(typeof d);
+	if(typeof b=='number'){
+		console.log('b는 number  입니다..');
+	}
+	if(typeof g =='undefined'){
+		console.log('g는 undefined  입니다.[ typeof ]');
+	}
+	if( g == undefined){
+		console.log('g는 undefined  입니다..');
+	}
+	console.log(typeof h);//object
+	if(h==null){
+		console.log('h 는 null입니다.')
+	}
+	console.log(typeof o1);
+	console.log(typeof o2);
+	console.log(typeof array1);
+	console.log(typeof array2);
+	console.log(typeof nameArray);
+	console.log(typeof scoreArray);
+	
+	
+</script>
+</head>
+<body>
+<h1>javascript variable</h1><hr>
+</body>
+</html>

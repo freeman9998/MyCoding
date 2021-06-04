@@ -1,0 +1,33 @@
+<<<Spring Scheduler>>>
+	일정한 시간간격 또는 일정한 시각에 특정 로직을 돌리기 위해서 사용하는 것을 Scheduler라고 합니다.
+	이런 Scheduler는 Spring에서 Spring Scheduler와 Spring Quartz라는 2가지 방식으로 제공됩니다.
+
+	1. Spring Scheduler
+		- Spring Scheduler는 별도의 추가적인 의존성이 필요하지 않습니다. 
+		- @Scheduled 어노테이션 메서드에 붙여 주기만 하면 됩니다. 
+		- 해당 어노테이션의 내부 값으로 scheduler가 실행 될 타이밍을 정할 수 있습니다. 
+		- scheduling을 할 메서드는 2개의 조건을 가집니다.
+			a. method는 void의 return 타입을 가져야합니다.
+			b. method는 파라미터를 가질 수 없습니다.
+		-Scheduler는 기본적으로 thread 1개를 이용하여 동기 형식으로 진행됩니다. 
+		 	즉 1번 스케줄이 끝나지 않으면 2번 스케줄이 시작시간이 되었다고 하더라도 시작되지 않습니다. 
+		 	비동기 형식으로 진행하시고 싶으시다면 @EnableAsync 어노테이션을 이용할 수 있습니다.
+	2. Spring Quartz
+	   - Quartz는 Terracotta 라는 회사에 의해 개발된 Job Scheduling 라이브러리입니다. 
+	     완전히 자바로 개발되어 어느 자바 프로그램에서도 쉽게 통합해서 개발할 수 있습니다. 
+	     Quartz는 수십에서 수천 개의 작업도 실행 가능하며 간단한 interval 형식이나 Cron 표현식으로 복잡한 스케줄링도 지원합니다.
+	   
+	   - 의존성추가
+			<!-- quartz 라이브러러리 -->
+			<dependency>
+				<groupId>org.quartz-scheduler</groupId>
+				<artifactId>quartz</artifactId>
+				<version>2.3.2</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${spring.framework.version}</version>
+			</dependency>
+	- 

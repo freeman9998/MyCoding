@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<context:component-scan base-package="com.itwill3.dao.user"/>
+	<!-- jdbc.properties파일 loading -->
+	<context:property-placeholder location="db.properties"/>
+	<!-- DataSource빈등록 -->
+	<bean 
+	  id="springDataSource" 
+	  class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+	  	p:driverClassName="${driverClass}"
+	  	p:url="${url}"
+	  	p:password="${password}"
+	  	p:username="${user}"
+	  />
+	 <!-- SqlSessionFactory --> 
+	 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	 	<property name="dataSource" ref="springDataSource"/>
+	 	<!-- 
+	 	<property name="configLocation" value="classpath:com/itwill3/dao/user/mybatis-config.xml"/>
+	 	 -->
+	 	<property name="mapperLocations">
+	 		<list>
+	 			<value>com/itwill3/dao/user/mapper/UserMapper.xml</value>
+	 		</list>
+	 	</property>
+	 </bean>
+	<!-- SqlSession -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"/>
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</beans>

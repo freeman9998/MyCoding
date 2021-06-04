@@ -1,0 +1,22 @@
+ANSI 트랜잭션 격리 레벨
+- Read uncommitted
+	lost update는 막고 dirty read는 허용.
+	다른 트랜잭션에 의해 커밋되지 않은 데이터에 쓰기 작업을 할 수 없다. 
+              하지만 읽기는 가능하다.
+	exclusive write lock을 사용한다.
+- Read committed
+	dirty read는 막고 unrepeatable read는 허용.
+	커밋되지 않은 쓰기 트랜잭션은 다른 트랜잭션들이 해당 레코드에 접근도 
+              못하게한다. 읽기 쓰기 전부 안 됨. 하지만 읽기 트랜잭션은 
+              다른 트랜잭션이 자신이 읽고 있는 레코드에 (읽기 쓰기 모두) 접근하는 것을 허용한다.
+	shared read lock과 exclusive write lock을 사용한다.
+- Repeatable read
+	unrepeatable read와 dirty read 둘 다 막는다. 
+	phantom read는 허용.
+	읽기 트랜잭션이 사용하는 데이터에 대한 쓰기(수정) 트랜잭션을 막는다. 
+	쓰기 트랜잭션이 사용하는 데이터에 접근하는 다른 모든 트랜잭션을 막는다.
+- Serializable
+	트랜잭션들을 일렬로 세워서 차례 차례 실행시키는 것과 같다.
+	low-level lock만 사용해서는 구현하기 어렵다.
+
+

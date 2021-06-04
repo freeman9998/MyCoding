@@ -1,0 +1,8 @@
+DB URL   : jdbc:oracle:thin:@182.237.126.19:XE
+
+<<<<<< SQLDeveloper >>>>>>
+
+호스트이름  : 182.237.126.19
+포트	   : 1521
+SID        : XE
+ 	

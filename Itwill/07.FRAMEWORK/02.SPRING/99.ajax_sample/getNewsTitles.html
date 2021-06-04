@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>getNewsTitlesCSV</title>
+		<meta name="author" content="Administrator" />
+		<style type="text/css" media="screen">
+			ul{
+				list-style: none;
+			}
+			a{
+				text-decoration: none;
+			}
+			a:link{
+				color: green;
+			}
+			
+			a:visited{
+				color:orange;
+			}
+			
+			a:active{
+				color: red;
+			}
+			a:hover{
+				color: blue;
+			}
+			
+			#content {
+				/*
+				 border: 1px solid black;
+				 */
+				width: 900px;
+				margin-bottom: 0px;
+				margin-top: 0px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			#header {
+				background:gray;
+				text-align: center;
+				height: 100px;
+			}
+			#top_menu{
+				background: green;
+				margin-left: 200px;
+			}
+			#top_menu ul{
+				margin-top: 0px;
+				margin-bottom: 0px;
+			}
+			#top_menu ul li{
+				display: inline;
+			}
+			#left_menu {
+				background:pink;
+				width: 200px;
+				height:500px;
+				float: left;
+			}
+			#main {
+				background: orange;
+				padding: 10px 10px 10px 10px;
+				height: 350px;
+				/*31]
+				 border: 1px dotted red;
+				 */
+				width: 680px;
+				margin: 0 0 0 200px;
+			}
+			#footer{
+				text-align:center;
+				background: yellow;
+				clear:left; 
+			}
+			
+		</style>
+		<script src="js/xmlHttpRequest.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+	    /********************************XML****************************/
+			/*
+			<result>
+				<count>7</count>
+				<newsList>
+					<news>
+						<title>2017년까지 주택 사 준공공임대로 쓰면 양도세 면제</title>
+						<date>2014. 12. 11 오후 3:01:33</date>
+						<company>한국일보</company>
+					</news>
+					 ...
+				</newsList>
+			</result>		 
+			 */
+			
+			function getXMLNews() {
+				sendRequest("getNewsTitlesXML.jsp", null, displayXMLNews);
+				//setTimeout(getXMLNNews,10000);
+			}
+
+			function displayXMLNews() {
+				if (httpRequest.readyState == 4) {
+					if (httpRequest.status == 200) {
+						var xmlDoc = httpRequest.responseXML;
+						
+						//root element
+						var resultE=xmlDoc.documentElement;
+						//alert("root element:"+resultE.nodeName);
+						
+						var countNL = xmlDoc.getElementsByTagName("count");
+						var countE  = countNL.item(0);
+						//alert("count element:"+countE.nodeName);
+						var newsCount = countE.firstChild.nodeValue;
+						//alert("newsCount:"+newsCount);
+						if(newsCount==0){
+							return;
+						}
+
+						var html = "";
+						html += "<ol>";
+						var newsNL=xmlDoc.getElementsByTagName("news");
+
+						for (var i=0; i < newsNL.length; i++) {
+						  var newsE=newsNL.item(i);
+						  //alert(i+":"+newsE.nodeName);
+						  /*
+						 <news>
+							<title>2017년</title>
+							<date>2014. 1</date>
+							<company>한국</company>
+						 </news>
+						   */
+						  var titleNL= newsE.getElementsByTagName("title");
+						  var titleE = titleNL.item(0);
+						  var titleStr = titleE.firstChild.nodeValue;
+						  var dateStr = newsE.getElementsByTagName("date")
+						  				.item(0).firstChild.nodeValue;
+						  var companyStr=newsE.getElementsByTagName("company")
+						   				.item(0).firstChild.nodeValue;				
+						  				
+						  html+="<li>XML : ";
+						  html+=titleStr;
+						  html+="["+dateStr+"] ";
+						  html+=companyStr;
+						  html+="</li>";
+						  
+						};
+						html += "</ol>";
+						var newsDIV = document.getElementById("news");
+						newsDIV.innerHTML = html;
+					}
+
+				}
+
+			}
+						/*
+			 var jsonObject = {
+			 count: 7,
+			 news: [
+			 {
+			 title: "2017년까지 주택 사 준공공임대로 쓰면 양도세 면제",
+			 date: "2014. 12. 11 오전 11:52:21",
+			 company: "한국일보"
+			 },
+			 {
+			 title: "정부 '北 개성공단 규정개정 퇴행적…용인 못해'",
+			 date: "2014. 12. 11 오전 11:52:21",
+			 company: "조선일보"
+			 },
+			 {
+			 title: "여야 긴급현안질문 진용확정…창과 방패 대결 연합뉴스",
+			 date: "2014. 12. 11 오전 11:52:21",
+			 company: "중앙일보"
+			 },
+			 {
+			 title: "지하철 4호선 남양주 진접선 기공식…2020년 개통",
+			 date: "2014. 12. 11 오전 11:52:21",
+			 company: "경기일보"
+			 },
+			 {
+			 title: "김무성 '성역없이 얘기' 문희상 국정농단 논의",
+			 date: "2014. 12. 11 오전 11:52:21",
+			 company: "부산일보"
+			 },
+			 {
+			 title: "미 CIA 고문실태 보고서 공개…'최소 119명에 자행'",
+			 date: "2014. 12. 11 오전 11:52:21",
+			 company: "대한일보"
+			 },
+			 {
+			 title: "올해 한국서 가장 인기끈 유튜브 동영상 겨울왕국",
+			 date: "2014. 12. 11 오전 11:52:21",
+			 company: "민국일보"
+			 }
+			 ]
+			 };
+
+			 alert(jsonObject.count);
+			 */
+			/***********************JSON*******************/
+			function getJSONNews() {
+				sendRequest("getNewsTitlesJSON.jsp", null, displayJSONNews);
+				//setTimeout(getJSONNews,10000);
+			}
+
+			function displayJSONNews() {
+				if (httpRequest.readyState == 4) {
+					if (httpRequest.status == 200) {
+						var jsonStr = httpRequest.responseText;
+						/*
+						 * JSON DATA
+						 *   ({})-->parsing-->jsonObject
+						 * 	 ([])-->parsing-->jsonArray
+						 */
+
+						var jsonObject = window.eval("(" + jsonStr + ")");
+						if (jsonObject.count == 0) {
+							return;
+						}
+						var newsArray = jsonObject.news;
+						var html = "";
+						html += "<ol>";
+						for (var i = 0; i < newsArray.length; i++) {
+							html += "<li>JSON : ";
+							html += newsArray[i].title + "[" + newsArray[i].date + "]" + newsArray[i].company;
+							html += "</li>";
+						};
+						html += "</ol>";
+						var newsDIV = document.getElementById("news");
+						newsDIV.innerHTML = html;
+					}
+
+				}
+
+			}
+			/***************************CSV***************************/
+			
+			function getCSVNews() {
+				sendRequest("getNewsTitlesCSV.jsp", null, displayCSVNews);
+				//setTimeout(getCVSNews,10000);
+			}
+
+			function displayCSVNews() {
+				if (httpRequest.readyState == 4) {
+					if (httpRequest.status == 200) {
+						var csvStr = httpRequest.responseText;
+						//alert(csvStr);
+						//3|뉴스타이틀1,뉴스타이틀2,뉴스타이틀3
+
+						var csvArray = csvStr.split("|");
+						var countNews = csvArray[0];
+						//alert(countNews);
+						if (countNews == 0) {
+							return;
+						}
+						var csvData = csvArray[1];
+						//뉴스타이틀1,뉴스타이틀2,뉴스타이틀3
+						var newsArray = csvData.split(",");
+						var html = "";
+						html += "<ol>";
+						for (var i = 0; i < newsArray.length; i++) {
+							html += "<li>CSV : " + newsArray[i] + "</li>";
+						}
+						html += "</ol>";
+						//alert(html);
+						var newsDIV = document.getElementById("news");
+						newsDIV.innerHTML = html;
+					}
+
+				}
+
+			}
+
+			function showNews() {
+				var newsDIV = document.getElementById("news");
+				newsDIV.style.display = 'block';
+
+			}
+
+			function hideNews() {
+				var newsDIV = document.getElementById("news");
+				newsDIV.style.display = 'none';
+				//newsDIV.style.visibility='hidden';//IE
+			}
+
+
+			window.onload = function() {
+				//hideNews();
+			};
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<div id="header" >
+				<h1>실시간 헤드라인뉴스</h1>
+			</div>
+			
+			<div id="left_menu">
+				<ul>
+					<li>
+						<a href="#" onclick="getCSVNews();" onmouseover="getCSVNews();">CSV NEWS</a>
+					</li>
+					<li>
+						<a href="#" onclick="getJSONNews();" onmouseover="getJSONNews();">JSON NEWS</a>
+					</li>
+					<li>
+						<a href="#" onclick="getXMLNews();" onmouseover="getXMLNews();">XML NEWS</a>
+					</li>
+					<li>
+						<a href="#" onclick="getXMLNews();" onmouseover="getXMLNews();">XML NEWS</a>
+					</li>
+					<li>
+						<a href="#" onclick="getXMLNews();" onmouseover="getXMLNews();">XML NEWS</a>
+					</li>
+					<li>
+						<a href="#" onclick="getXMLNews();" onmouseover="getXMLNews();">XML NEWS</a>
+					</li>
+					<li>
+						<a href="#" onclick="getXMLNews();" onmouseover="getXMLNews();">XML NEWS</a>
+					</li>
+					<li>
+						<a href="#" onclick="getXMLNews();" onmouseover="getXMLNews();">XML NEWS</a>
+					</li>
+					<li>
+						<a href="#" onclick="getXMLNews();" onmouseover="getXMLNews();">XML NEWS</a>
+					</li>
+				</ul>
+			</div>
+			<div id="top_menu"> 
+				<ul>
+					<li>
+						<a href="#" onclick="getCSVNews();" onmouseover="getCSVNews();">CSV NEWS</a>
+					</li>
+					<li>
+						<a href="#" onclick="getJSONNews();" onmouseover="getJSONNews();">JSON NEWS</a>
+					</li>
+					<li>
+						<a href="#" onclick="getXMLNews();" onmouseover="getXMLNews();">XML NEWS</a>
+					</li>
+				</ul>		
+		    </div>
+			<div id="main">
+				<div id="news">
+					new title
+				</div>
+			</div>
+			<div id="footer">
+				all right reserver by kim kyungho 2014.
+			</div>			
+		</div>
+	</body>
+</html>
+

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.shop.dao.mapper.OrdersMapper">
+
+	<resultMap id="order_Map" type="com.itwill.shop.domain.Orders" autoMapping="true">
+		<result column="ORDERS_NO" property="orders_no"/>
+		<result column="ORDERS_DESC" property="orders_desc"/>
+		<result column="ORDERS_DATE" property="orders_date"/>
+		<result column="ORDERS_PRICE" property="orders_price"/>
+		<result column="ADDRESS_NAME" property="address_name"/>
+		<result column="MEMBERS_NO" property="members_no"/>
+		<collection property="ordersdetailList" ofType="com.itwill.shop.domain.OrdersDetail" javaType="List" autoMapping="true">
+			<result column="ORDERS_DETAIL_NO" property="orders_detail_no"/>
+			<result column="ORDERS_DETAIL_QTY" property="orders_detail_qty"/>
+			<result column="FOOD_NO" property="food_no"/>
+		</collection>
+	</resultMap>
+	
+	<select id="findOrderListById" parameterType="int" resultMap="order_Map">
+		select o.orders_no as orders_no,orders_desc,orders_date,orders_price,members_no,orders_detail_no, 
+		orders_detail_qty,food_no from orders o join 
+		orders_detail od on o.orders_no=od.orders_no 
+		where members_no=#{members_no}
+	</select>
+	
+	<select id="findOrderByOne" parameterType="hashmap" resultMap="order_Map">
+		select o.orders_no as orders_no,orders_desc,orders_date,orders_price,members_no,orders_detail_no, 
+		orders_detail_qty,food_no from orders o join 
+		orders_detail od on o.orders_no=od.orders_no 
+		where members_no=#{members_no} and o.orders_no=#{orders_no}
+	</select>
+	
+	<insert id="createOrders" parameterType="com.itwill.shop.domain.Orders">
+		insert into orders(orders_no,orders_desc,orders_date,orders_price,address_name,members_no) values(orders_no_seq.nextval,#{orders_desc},sysdate,#{orders_price},#{address_name,jdbcType=VARCHAR},#{members_no})
+	</insert>
+	
+	<insert id="createOrdersDetail" parameterType="com.itwill.shop.domain.OrdersDetail">
+		insert into orders_detail(orders_detail_no,orders_detail_qty,orders_no,food_no) values(orders_detail_no_seq.nextval,#{orders_detail_qty},orders_no_seq.currval,#{food_no})
+	</insert>
+	
+	<delete id="deleteOrders" parameterType="int">
+		delete from orders where members_no=#{members_no}
+	</delete>
+	
+	<delete id="deleteOrdersDetail" parameterType="int">
+		delete from orders_detail where orders_no in(select orders_no from orders where members_no=#{members_no})
+	</delete>
+	
+	<delete id="deleteOrdersByNo" parameterType="int">
+		delete from orders where orders_no=#{orders_no}
+	</delete>
+	
+	<delete id="deleteOrdersDetailByNo" parameterType="int">
+		delete from orders_detail where orders_no=#{orders_no}
+	</delete>
+</mapper>

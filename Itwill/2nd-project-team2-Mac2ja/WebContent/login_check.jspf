@@ -1,0 +1,15 @@
+<%@ page import="com.itwill.shop.domain.Members"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%	
+	String sEmail="";
+	int sMemberNo=0;
+	if(session.getAttribute("members_email")!=null){
+		sEmail = (String)session.getAttribute("members_email");
+		sMemberNo = (int)session.getAttribute("members_no");	
+	}
+	if(sEmail.equals("")){
+		response.sendRedirect("mac_main.jsp");
+		return;
+	}
+%>	
