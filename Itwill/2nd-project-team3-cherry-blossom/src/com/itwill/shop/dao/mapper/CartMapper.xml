@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.shop.dao.mapper.CartMapper">
+
+	<resultMap id="cartResultMap" type="Cart" autoMapping="true">
+		<association property="product" javaType="Product" autoMapping="true"></association>
+	</resultMap>
+			
+	<!-- 장바구니 -->
+	<select id="getCartList" parameterType="String" resultMap="cartResultMap">
+	select c.cart_no,p_name,p_color,p_size,p_price,c.cart_qty,p.p_no
+	from cart c
+	join product p on c.p_no=p.p_no
+	join userinfo u on c.user_id=u.user_id
+	where u.user_id=#{user_id}
+	order by cart_no asc
+	</select>
+	
+	<!-- 장바구니 삽입 -->
+	<insert id="add" parameterType="Cart">
+		<selectKey order="BEFORE" keyProperty="product.p_no" resultType="int">
+			select p_no from product where p_no=#{product.p_no}
+		</selectKey>
+		insert into cart values(cart_cart_no_SEQ.nextval,#{cart_qty},#{user_id},#{product.p_no})
+	</insert>
+	
+	<!-- 수량변경 -->
+	<update id="updateCartQty" parameterType="Cart">
+	update cart set cart_qty=#{cart_qty} where cart_no=#{cart_no}
+	</update>
+	
+	<!-- 하나삭제  -->
+	<delete id="deleteCartByNo" parameterType="int">
+	delete cart where cart_no=#{cart_no} 
+	</delete>
+	
+	<!-- 장바구니 비우기 -->	
+	<delete id="deleteCart" parameterType="String" >
+	delete cart where user_id=#{user_id}
+	</delete>
+</mapper>

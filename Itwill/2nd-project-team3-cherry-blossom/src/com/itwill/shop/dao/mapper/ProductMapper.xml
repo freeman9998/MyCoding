@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.shop.dao.mapper.ProductMapper">
+	<!-- 상품전체 -->
+	<select id="list" resultType="Product">
+		select * from product
+	</select>
+	<select id="listAllByDate" resultType="Product">
+		select * from product order by p_date desc
+	</select>
+	<select id="listAllByName" resultType="Product">
+		select * from product order by p_name asc
+	</select>
+	<select id="listAllByLowPrice" resultType="Product">
+		select * from product order by p_price asc
+	</select>
+	<select id="listAllByHighPrice" resultType="Product">
+		select * from product order by p_price desc
+	</select>
+	<!-- 상위카테고리별 -->
+	<select id="listCategoryByDate" parameterType="String" resultType="Product">
+		select * from product
+		where p_category = #{p_category}
+		order by p_date desc
+	</select>
+	<select id="listCategoryByName" parameterType="String" resultType="Product">
+		select * from product
+		where p_category = #{p_category}
+		order by p_name asc
+	</select>
+	<select id="listCategoryLowPrice" parameterType="String" resultType="Product">
+		select * from product
+		where p_category = #{p_category}
+		order by p_price asc
+	</select>
+	<select id="listCategoryHighPrice" parameterType="String" resultType="Product">
+		select * from product
+		where p_category = #{p_category}
+		order by p_price desc
+	</select>
+	<!-- 하위카테고리별 -->
+	<!-- 상위카테고리도 입력하려면 맵을 사용해야 함 -->
+	<select id="listSubCategoryByDate" parameterType="String" resultType="Product">
+		select * from product 
+		where p_subcategory = #{p_subcategory}
+		order by p_date desc
+	</select>
+	<select id="listSubCategoryByName" parameterType="String" resultType="Product">
+		select * from product 
+		where p_subcategory = #{p_subcategory}
+		order by p_name asc
+	</select>
+	<select id="listSubCategoryByLowPrice" parameterType="String" resultType="Product">
+		select * from product 
+		where p_subcategory = #{p_subcategory}
+		order by p_price asc
+	</select>
+	<select id="listSubCategoryByHighPrice" parameterType="String" resultType="Product">
+		select * from product 
+		where p_subcategory = #{p_subcategory}
+		order by p_price desc
+	</select>
+	
+	<!-- 상품 하나 -->
+	<select id="findProductByNo" parameterType="int" resultType="Product">
+		select * from product where p_no=#{p_no}
+	</select>
+	<!-- 상품 검색 -->
+	<select id="findProductByNameLike" parameterType="String" resultType="Product">
+		select * from product where p_name like '%'||#{p_name}||'%'
+	</select>
+	<!-- 하위카테고리 보이기 -->
+	<select id="listSubCategoryByCategory" parameterType="String" resultType="String">
+		select distinct p_subcategory from product where p_category=#{p_category}
+	</select>
+	<!-- 하위카테고리 보이기+count -->
+	<select id="listSubCategoryByCategoryMap" parameterType="String" resultType="Map">
+		select p_subcategory,count(*) cnt from product
+		where p_category=#{p_category}
+		group by p_subcategory
+	</select>
+	<!-- 상위카테고리+count -->
+	<select id="listCategoryByCategoryMap" parameterType="String" resultType="Map">
+		select p_category,count(*) cnt from product
+		group by p_category
+	</select>
+	<!-- 전체상품의 갯수 -->
+	<select id="getProductCount" resultType="int">
+		select count(*) cnt from product
+	</select>
+	<select id="findProductList" resultType="Product">
+		select * from
+		(select rownum idx, p.* from
+		(select * from product
+		order by product.p_no asc) p)
+		where idx &gt;=#{start} and idx &lt;=#{last}
+	</select>
+</mapper>

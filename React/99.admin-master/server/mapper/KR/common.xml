@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="commMapper">
+     <select id="login">
+     select a.user_id
+          , a.user_name
+          , a.email_addr
+          , a.auth_cd
+          , a.country_cd
+          , a.login_id
+          , (SELECT CONCAT('https://ics-krsv.com:8443/'
+                         , comm_cd_val_desc
+                         , SUBSTRING_INDEX(SUBSTRING_INDEX(fa.server_fullname, comm.comm_cd_val_nm, -1), fa.filename_map, 1)
+                         , fa.filename_map) imgList
+             FROM   lian_fileattach fa
+               , (SELECT comm_cd_val_nm, comm_cd_val_desc
+                    FROM   licom_comm_cd_dtl
+                    WHERE  comm_cd_id       = 'FTP_SERVER_DIR'
+                    AND    comm_cd_val_desc = 'detail'
+               ) comm        
+             WHERE  fa.groupuuid = b.logo_uuid
+            ) AS img_url
+     from   lian_user_info a
+          , lian_biz_info  b
+     where  a.login_id = #{login_id}
+     and    a.passwd = f_hex(#{passwd}, 'E')
+     and    b.biz_id = a.biz_id
+     </select>
+     <select id="demo_login">
+     select a.user_id
+          , a.user_name
+          , a.email_addr
+          , a.auth_cd
+          , a.country_cd
+          , a.login_id
+          , (SELECT CONCAT('https://ics-krsv.com:8443/'
+                         , comm_cd_val_desc
+                         , SUBSTRING_INDEX(SUBSTRING_INDEX(fa.server_fullname, comm.comm_cd_val_nm, -1), fa.filename_map, 1)
+                         , fa.filename_map) imgList
+             FROM   lian_fileattach fa
+               , (SELECT comm_cd_val_nm, comm_cd_val_desc
+                    FROM   licom_comm_cd_dtl
+                    WHERE  comm_cd_id       = 'FTP_SERVER_DIR'
+                    AND    comm_cd_val_desc = 'detail'
+               ) comm        
+             WHERE  fa.groupuuid = b.logo_uuid
+            ) AS img_url
+     from   lian_user_info a
+          , lian_biz_info  b
+     where  a.login_id = #{login_id}
+     and    b.biz_id = a.biz_id
+     </select>
+     <select id="top_menu_list">
+     select a.menu_id
+          , a.menu_nm
+          , a.menu_level
+          , substring_index(substring_index(a.page_url, '::', -1), '.', 1) as page_url
+          , a.country_cd
+          , a.menu_order
+          , a.del_yn
+          , a.high_menu_id
+     from   lian_menu a
+          , lian_menu_auth b
+          , lian_user_info c
+     where  del_yn       = 'N'
+     and    menu_order   > 999
+     and    a.country_cd = b.country_cd
+     and    a.country_cd = c.country_cd
+     and    a.menu_id    = b.menu_id
+     and    b.auth_cd    = c.auth_cd
+     and    c.user_id    = ${user_id}
+     and    a.menu_level = 1
+     order by menu_order
+     </select>
+     <select id="sub_menu_list">
+     select a.menu_id
+          , a.menu_nm
+          , a.menu_level
+          , substring_index(substring_index(a.page_url, '::', -1), '.', 1) as page_url
+          , a.country_cd
+          , a.menu_order
+          , a.del_yn
+     from   lian_menu a
+          , lian_menu_auth b
+          , lian_user_info c
+     where  a.high_menu_id = #{high_menu_id}
+     and    del_yn       = 'N'
+     and    menu_order   > 999
+     and    a.country_cd = b.country_cd
+     and    a.country_cd = c.country_cd
+     and    a.menu_id    = b.menu_id
+     and    b.auth_cd    = c.auth_cd
+     and    c.user_id    = ${user_id}
+     order by menu_order
+     </select>
+</mapper>

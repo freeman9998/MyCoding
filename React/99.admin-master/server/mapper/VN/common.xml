@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="commMapper">
+     <select id="login">
+     select user_id
+          , user_name
+          , email_addr
+          , auth_cd
+          , country_cd
+     from   fcms_user_info
+     where  login_id = #{login_id}
+     and    passwd = f_hex(#{passwd}, 'E')
+     </select>
+     <select id="top_menu_list">
+     select a.menu_id
+          , a.menu_nm
+          , a.menu_level
+          , substring_index(substring_index(a.page_url, '::', -1), '.', 1) as page_url
+          , a.country_cd
+          , a.menu_order
+          , a.del_yn
+          , a.high_menu_id
+     from   fcms_menu a
+          , fcms_menu_auth b
+          , fcms_user_info c
+     where  del_yn       = 'N'
+     and    menu_order   > 999
+     and    a.country_cd = b.country_cd
+     and    a.country_cd = c.country_cd
+     and    a.menu_id    = b.menu_id
+     and    b.auth_cd    = c.auth_cd
+     and    c.user_id    = ${user_id}
+     and    a.menu_level = 1
+     order by menu_order
+     </select>
+     <select id="sub_menu_list">
+     select a.menu_id
+          , a.menu_nm
+          , a.menu_level
+          , substring_index(substring_index(a.page_url, '::', -1), '.', 1) as page_url
+          , a.country_cd
+          , a.menu_order
+          , a.del_yn
+     from   fcms_menu a
+          , fcms_menu_auth b
+          , fcms_user_info c
+     where  a.high_menu_id = #{high_menu_id}
+     and    del_yn       = 'N'
+     and    menu_order   > 999
+     and    a.country_cd = b.country_cd
+     and    a.country_cd = c.country_cd
+     and    a.menu_id    = b.menu_id
+     and    b.auth_cd    = c.auth_cd
+     and    c.user_id    = ${user_id}
+     order by menu_order
+     </select>
+</mapper>

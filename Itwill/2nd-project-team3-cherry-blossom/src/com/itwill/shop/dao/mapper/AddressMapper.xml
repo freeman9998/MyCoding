@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.shop.dao.mapper.AddressMapper">
+
+
+
+<!-- 회원한명의 새로운 배송정보 생성 -->
+<insert id="insertNewAddress" parameterType="Address">
+	insert into address values(address_a_no_SEQ.nextval,#{ao_name},#{ad_name},#{ad_phone},#{ad_address},#{ad_message},#{jumun.j_no})
+</insert>
+
+
+<!-- 회원한명 주문완료시 새로운배송정보 조회 -->
+<select id="selectNewAddressByNo" parameterType="int" resultType="Address">
+	select ad_name,ad_address,ad_phone,ad_message from address where a_no=#{a_no}
+</select>
+
+</mapper>

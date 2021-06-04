@@ -1,0 +1,43 @@
+/*****************************
+  Counter
+*****************************/
+.counter {
+	text-align: center;
+
+	.counter-number {
+		margin-top: 20px;
+
+		.timer {
+			font-size: 36px;
+			line-height: 1;
+			font-weight: 700;
+			color: $gray-9;
+		}
+
+	}
+
+	.counter-icon {
+		i {
+			font-size: 54px;
+			line-height: 1;
+			color: $primary;
+		}
+
+	}
+
+}
+@media (max-width:767px) {
+		.counter {
+		.counter-icon {
+			i {
+				font-size: 40px;
+			}
+		}
+		.counter-number {
+			.timer {
+				font-size: 30px;
+			}
+		}
+	}
+}
+

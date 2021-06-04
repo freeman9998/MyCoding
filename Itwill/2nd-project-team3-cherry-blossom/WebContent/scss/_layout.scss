@@ -1,0 +1,807 @@
+/*****************************
+  Layout
+*****************************/
+
+/* Section Title */
+.section-title {
+	margin-bottom: 50px;
+
+	.pre-title {
+		font-size: 14px;
+		color: $primary;
+		font-weight: bold;
+	}
+
+}
+
+/* Client Logo */
+.our-clients {
+	.owl-item {
+		text-align: center;
+
+		img {
+			filter: grayscale(100%);
+			transition: all 0.3s ease-in-out;
+		}
+
+		&:hover {
+			img {
+				filter: inherit;
+			}
+
+		}
+
+	}
+
+}
+
+/* Back To Top */
+.back-to-top {
+	a {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: fixed;
+		bottom: 50px;
+		right: 40px;
+		width: 40px;
+		height: 40px;
+		margin: 0px;
+		color: $white;
+		font-size: 16px;
+		background: $primary;
+		box-shadow: $box-shadow;
+		transition: all 0.3s ease-in-out;
+		z-index: 999;
+
+		&:hover {
+			background: $gray-9;
+			color: $white;
+		}
+
+		&:focus {
+			background: $gray-9;
+			color: $white;
+		}
+
+	}
+
+}
+
+/* Border Radius */
+.rounded {
+	border-radius: $border-radius-md !important;
+}
+
+.rounded-lg {
+	border-radius: $border-radius-lg !important;
+}
+
+/* Social Bg Color */
+.social-bg-hover {
+	&:before {
+		content: "";
+		color: $white;
+		width: 100%;
+		height: 100%;
+		display: inline-block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		transition: all 0.3s ease-in-out;
+	}
+
+	position: relative;
+	color: $white;
+
+	&:hover {
+		color: $white;
+
+		&:before {
+			background-color: rgba(black, 0.1);
+		}
+
+	}
+
+	span {
+		position: relative;
+	}
+
+}
+
+/* Social Icon Round */
+.social-icon-round {
+	ul {
+		li {
+			margin-right: 15px;
+
+			a {
+				width: 45px;
+				height: 45px;
+				line-height: 45px;
+				border: 1px solid $black;
+				border-radius: $border-radius-round;
+				display: block;
+				text-align: center;
+			}
+
+			&:hover {
+				a {
+					border-color: $border-color-3;
+				}
+
+			}
+
+		}
+
+	}
+
+}
+
+.facebook-bg {
+	background-color: #445c8e;
+}
+
+.twitter-bg {
+	background-color: #43afe9;
+}
+
+.google-bg {
+	background-color: #dc0510;
+}
+
+.instagram-bg {
+	background-color: #DD2A7B;
+}
+
+.linkedin-bg {
+	background-color: #007eb3;
+}
+
+/* Instagram */
+.instagram-grid-4 {
+	min-height: 920px;
+}
+
+.instagram-grid-6 {
+	.instagram_profile {
+		display: none;
+	}
+}
+
+/* Inner Header */
+.inner-header {
+	padding: 180px 0;
+}
+
+/* Product Color */
+.red {
+	background: #ff005a;
+}
+
+.olive {
+	background: #ab9b1e;
+}
+
+.navy {
+	background: #3d59aa;
+}
+
+.green-bg {
+	background: rgba(44, 132, 30, 0.30);
+}
+
+.green {
+	color: #2c841e !important;
+}
+
+/* Maintenance */
+.maintenance-content {
+	padding-top: 100px;
+}
+
+/* Coming soon */
+.coming-soon-top {
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+.coming-soon-section {
+	padding-top: 100px;
+
+	.coming-soon-icon {
+		i {
+			font-size: 110px;
+			color: $gray-2;
+		}
+
+	}
+
+}
+
+/* Form */
+.form-control {
+	padding: 10px 20px;
+	height: 48px;
+	font-size: 14px;
+	border-color: $border-color;
+	border-radius: inherit;
+	transition: all 0.3s ease-in-out;
+
+	&:focus {
+		box-shadow: none;
+		border-color: $border-color-3;
+	}
+
+}
+
+.custom-control-input {
+	&:checked {
+		~ {
+			.custom-control-label {
+				&:before {
+					background: $primary;
+					border-color: $primary;
+				}
+
+			}
+
+		}
+
+	}
+
+}
+
+.custom-control-input {
+	&:focus~.custom-control-label {
+		&::before {
+			box-shadow: none;
+		}
+
+	}
+
+	&:focus {
+		&:not(:checked)~.custom-control-label {
+			&::before {
+				border-color: $primary;
+			}
+
+		}
+
+	}
+
+	&:not(:disabled) {
+		&:active~.custom-control-label {
+			&::before {
+				background: $primary;
+				border-color: $primary;
+			}
+
+		}
+
+	}
+
+}
+
+/* Input Size */
+.form-control-sm {
+	height: 44px;
+}
+
+.form-control-md {
+	height: 52px;
+}
+
+.form-control-lg {
+	height: 58px;
+}
+
+.form-control-xl {
+	height: 62px;
+	font-size: 1.45rem;
+}
+
+/* Form Inline */
+.form-inline {
+	position: relative;
+
+	.btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		font-size: 14px;
+		width: 38px;
+		height: 38px;
+		padding: 0;
+	}
+
+	.form-group {
+		width: 100%;
+	}
+
+	.form-control {
+		width: 100%;
+	}
+
+}
+
+.form-flat-style {
+	.form-control {
+		background-color: $gray-1;
+		border-color: $border-color-2;
+
+		&:focus {
+			border-color: $border-color-3;
+		}
+
+	}
+
+}
+
+/* Newsletter */
+.input-with-btn .form-control {
+	padding-right: 50px;
+}
+
+/* Sticky column */
+.is-sticky {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 80px;
+}
+
+/* Tooltip */
+.bs-tooltip-auto[x-placement^=right] .arrow::before,
+.bs-tooltip-right .arrow::before {
+	border-right-color: $white
+}
+
+.tooltip-inner {
+	width: 120px;
+	padding: 5px;
+	background-color: $white;
+	box-shadow: 0px 5px 10px rgba($black, 0.1);
+}
+
+.tooltip.show {
+	opacity: 1;
+}
+
+/* Payment */
+.rotate {
+	transform: rotate(140deg);
+}
+
+/* contact us 02 */
+.inner-header {
+	.feature-info {
+		.feature-info-icon {
+			i {
+				font-size: 24px;
+				line-height: 1;
+			}
+
+		}
+
+	}
+
+}
+
+/* Look Book */
+.look-book-img {
+	position: relative;
+	padding-left: 100px;
+
+	.look-title {
+		padding: 20px 25px;
+		margin-bottom: 0;
+		background: $white;
+		position: absolute;
+		left: 0;
+		top: 100px;
+		&:hover{
+			color: $primary;
+		}
+	}
+
+}
+
+.look-product {
+	padding: 0px 100px;
+
+	.look-book-product {
+		margin-bottom: 15px;
+
+		.look-book-info {
+			padding: 10px;
+			text-align: center;
+			a{
+
+				&:hover{
+					color: $primary;
+				}
+			}
+		}
+
+	}
+
+}
+
+.look-book-img.section-right {
+	padding-right: 100px;
+	padding-left: 0;
+
+	.look-title {
+		right: 0;
+		left: inherit;
+	}
+
+}
+
+/* Promo Popup */
+.modal-backdrop {
+	background-color: $gray-1;
+}
+
+.modal-backdrop.show {
+	opacity: .9;
+}
+
+.promo-popup {
+	.modal-dialog {
+		.modal-content {
+			border: none;
+			border-radius: 0px;
+			box-shadow: $box-shadow-lg;
+		}
+
+		.modal-body {
+			padding: 20px;
+		}
+
+		.close {
+			position: absolute;
+			right: 15px;
+			top: 10px;
+			z-index: 1;
+		}
+
+	}
+
+}
+
+/* Flexor Item Style */
+.flexor-item-style {
+	.flexor-item {
+		position: relative;
+
+		.flexor-item-img {
+			position: relative;
+			padding: 0 90px;
+
+			.flexor-item-btn {
+				position: absolute;
+				top: 50%;
+				right: 0;
+				transform: translate(0, -50%);
+			}
+
+		}
+
+		.flexor-item-content {
+			background: $white;
+			max-width: 450px;
+			padding: 40px;
+			position: relative;
+			margin-top: -60px;
+		}
+
+	}
+
+}
+
+/* Flex Item Style 1 */
+.flexor-item-style-1 {
+	.flexor-item {
+		.flexor-item-img {
+			position: relative;
+
+			.flexor-item-btn {
+				position: absolute;
+				bottom: 75px;
+				left: 0;
+				transform: translate(-50%, -50%);
+			}
+
+		}
+
+	}
+
+	.flexor-item-info {
+		padding: 40px;
+		margin-left: -120px;
+		margin-bottom: 100px;
+		background: $white;
+	}
+ .flexor-item-content{
+ 	padding: 100px 15px 15px;
+ }
+}
+
+/* Buy now popup */
+.buy-now {
+	padding: 6px 0px;
+
+	.btn.btn-sm {
+		padding: 4px 15px;
+		font-size: 12px;
+		line-height: 18px;
+		letter-spacing: 1px;
+		font-weight: normal;
+		border-radius: $border-radius-md;
+	}
+
+	.action-close {
+		position: absolute;
+		top: 3px;
+		right: 0;
+		.close-btn {
+			color: $white;
+
+			&:hover {
+				color: $primary;
+			}
+
+		}
+	}
+
+}
+
+/*****************************
+  Responsive
+*****************************/
+@media (min-width:1200px) {
+	.container {
+		max-width: 1410px;
+	}
+}
+
+@media (min-width:576px) {
+	.promo-popup {
+		.modal-dialog {
+			max-width: 700px;
+		}
+
+	}
+
+}
+
+@media (max-width:1199px) {
+
+	.flexor-item-style-1{
+		 .flexor-item-info{
+       		padding: 20px;
+			h2{
+				font-size: 32px;
+				line-height: 42px;
+			}
+		 }
+	}
+
+	/* Instagram */
+	.instagram-grid-4 {
+		min-height: 824px;
+	}
+}
+
+@media (max-width:991px) {
+
+	/* Section Title */
+	.section-title {
+		margin-bottom: 30px;
+	}
+
+	.flexor-item-style {
+		.flexor-item {
+			.flexor-item-img {
+				padding: 0 40px;
+			}
+			.flexor-item-content {
+				padding: 20px;
+			}
+		}
+	}
+
+	.flexor-item-style-1{
+	 .flexor-item-info{
+	 	margin-bottom: 60px;
+	 	 h2 {
+	 	 	 font-size: 26px;
+      line-height: 36px;
+	 	 }
+	 }
+	 .flexor-item{
+	 	.flexor-item-img{
+	 		.flexor-item-btn{
+	 			left: 30px;
+	 		}
+	 	}
+	 }
+	 .flexor-item-content{
+	 	padding: 60px 10px 10px;
+	 	h5{
+	 		font-size: 18px;
+	 		line-height: 26px;
+	 	}
+	 }
+ }
+
+	/* Look Book */
+	.look-book{
+		.look-book-img{
+	   padding-left: 50px;
+	   h6.look-title{
+	   	padding: 10px 10px;
+	   	font-size: 14px;
+	   }
+		}
+		.look-product{
+			padding: 0px 50px;
+		}
+	}
+
+	/* Instagram */
+	.instagram-grid-4 {
+		min-height: 676px;
+	}
+
+	.instagram-grid-6 {
+		.instagram_gallery {
+			img {
+				width: 33.333333% !important;
+			}
+		}
+	}
+}
+
+@media only screen and (min-width:768px) and (max-width:991px) {
+	.container {
+		max-width: 96%;
+	}
+
+}
+
+@media (max-width:767px) {
+
+.inner-header{
+  padding: 100px 0;
+}
+	/* Section Title */
+	.section-title {
+		margin-bottom: 20px;
+	}
+
+	.flexor-item-style {
+		.flexor-item {
+			.flexor-item-img {
+				padding: 0 40px;
+			}
+
+			.flexor-item-content {
+				padding: 20px 0 0;
+			}
+
+		}
+
+	}
+
+	.flexor-item-style-1{
+		.flexor-item-info{
+			margin-bottom: 35px;
+		}
+		.flexor-item-content{
+			padding: 0px 10px;
+		}
+	}
+
+	/* Promo popup */
+	.promo-popup {
+		.modal-dialog{
+			margin-left: 15px;
+			margin-right: 15px;
+
+			.close {
+				right: 10px;
+				top: 5px;
+				font-size: 20px;
+			}
+		}
+	}
+
+	/* Look Book */
+	.look-book{
+		.look-book-img{
+	   padding-left: 50px;
+	   h6.look-title{
+	   	padding: 10px 10px;
+	   	font-size: 14px;
+	   }
+		}
+		.look-book-img.section-right{
+			padding-left: 0;
+			padding-right: 50px;
+		}
+		.look-product{
+			padding: 0px;
+		}
+	}
+
+	/* Instagram */
+	.instagram-grid-4 {
+		min-height: 804px;
+		.instagram_gallery {
+			img {
+				width: 31.33333% !important;
+			}
+		}
+	}
+
+
+}
+
+@media (max-width:575px) {
+	.inner-header{
+		padding: 80px 0;
+	}
+	.flexor-item-style {
+		.flexor-item {
+			.flexor-item-img {
+				padding: 0 20px;
+			}
+		}
+	}
+
+	.flexor-item-style-1{
+		.flexor-item-info{
+			margin-bottom: 0;
+			margin-left:0;
+			padding: 20px 0 0;
+		}
+	}
+
+
+	.table-responsive{
+		.table {
+			width: 600px;
+		}
+	}
+
+	.buy-now {
+		.action-close {
+			right: 15px;
+		}
+	}
+
+	/* Instagram */
+	.instagram-grid-4 {
+		min-height: 858px;
+		.instagram_gallery {
+			img {
+				width: 48% !important;
+			}
+		}
+	}
+
+	.instagram-grid-6 {
+		.instagram_gallery {
+			img {
+				width: 50% !important;
+			}
+		}
+	}
+
+}

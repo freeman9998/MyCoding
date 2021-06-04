@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stsMapper">
+    <select id="resycmi12m12-biz">
+    select 0    as id
+        , 'ALL' as nm
+    union
+    select biz_id as id
+         , biz_name as nm
+    from   fcms_biz_info
+    where  country_cd = 'VN'
+    order by 1
+     </select>
+
+    <select id="resycmi12m12-order">
+    select 0    as id
+        , 'ALL' as nm
+    union
+    select order_seq as id
+         , prod_nm as nm
+    from   fcms_order_info
+    where  biz_id = if(${biz_id} > 0, ${biz_id}, biz_id)
+    order by 1
+    </select>
+<!-- resycmi12m12-worldGeoChart -->
+    <select id="resycmi12m12-worldGeoChart">
+    select location_cd
+         , count(no) as cnt
+    from   app_log_suc
+    <choose>
+        <when test="dateCd == 'Y'">
+    where rgst_yy = substring(#{rgst_ymd}, 1, 4)
+        </when>
+        <when test="dateCd == 'M'">
+    where rgst_mm = substring(#{rgst_ymd}, 1, 6)
+        </when>
+        <otherwise>
+    where rgst_ymd = #{rgst_ymd}
+        </otherwise>
+    </choose>
+    and location_cd not in ('', 'ZZ')
+    <choose>
+        <when test="biz_id == '0' and order_seq == '0'">
+        </when>
+        <when test="biz_id != '0' and order_seq == '0'">
+    and order_seq in (select order_seq from fcms_order_info where biz_id = ${biz_id})
+        </when>
+        <otherwise>
+    and order_seq = ${order_seq}
+        </otherwise>
+    </choose>
+    group by location_cd
+    order by 2 desc
+     </select>
+<!-- resycmi12m12-countryGeoChart -->
+     <select id="resycmi12m12-countryGeoChart">
+    select a.no, a.rgst_ymd, a.device, a.os_type, a.os_version, a.order_seq, a.sequence
+         , f_hex(a.longitude, '') as longitude
+         , f_hex(a.latitude, '') as latitude
+         , f_hex(a.addr_all, '') as addr_all
+         , b.prod_nm
+         , (
+             SELECT CONCAT('http://192.168.0.248:8080/', comm_cd_val_desc, SUBSTRING_INDEX(SUBSTRING_INDEX(fa.server_fullname, comm.comm_cd_val_nm, -1), fa.filename_map, 1), fa.filename_map) imgList
+            FROM   fcms_fileattach fa,
+            (SELECT comm_cd_val_nm, comm_cd_val_desc
+            FROM   fcms_comm_cd_dtl
+            WHERE  comm_cd_id       = 'FTP_SERVER_DIR'
+            AND    comm_cd_val_desc = 'detail') comm        
+            WHERE  fa.groupuuid = b.biz_logo_uuid
+         ) as prod_img_url
+         , c.biz_name
+    from   app_log_suc a
+         , fcms_order_info b
+         , fcms_biz_info c
+    <choose>
+        <when test="dateCd == 'Y'">
+    where a.rgst_yy = substring(#{rgst_ymd}, 1, 4)
+        </when>
+        <when test="dateCd == 'M'">
+    where a.rgst_mm = substring(#{rgst_ymd}, 1, 6)
+        </when>
+        <otherwise>
+    where a.rgst_ymd = #{rgst_ymd}
+        </otherwise>
+    </choose>
+    and a.location_cd not in ('', 'ZZ')
+    <choose>
+        <when test="biz_id == '0' and order_seq == '0'">
+        </when>
+        <when test="biz_id != '0' and order_seq == '0'">
+    and a.order_seq in (select order_seq from fcms_order_info where biz_id = ${biz_id})
+        </when>
+        <otherwise>
+    and a.order_seq = ${order_seq}
+        </otherwise>
+    </choose>
+    and a.location_cd = if(#{location_cd} = 'ALL', a.location_cd, #{location_cd})
+    and b.order_seq = a.order_seq
+    and c.biz_id    = b.biz_id
+     </select>
+
+     <!-- resycmi12m12-regionGeoChart -->
+     <select id="resycmi12m12-regionGeoChart">
+    select a.addr_province as city
+         , count(a.no) as cnt
+    from   app_log_suc a
+    <choose>
+        <when test="dateCd == 'Y'">
+    where a.rgst_yy = substring(#{rgst_ymd}, 1, 4)
+        </when>
+        <when test="dateCd == 'M'">
+    where a.rgst_mm = substring(#{rgst_ymd}, 1, 6)
+        </when>
+        <otherwise>
+    where a.rgst_ymd = #{rgst_ymd}
+        </otherwise>
+    </choose>
+    and a.location_cd not in ('', 'ZZ')
+    <choose>
+        <when test="biz_id == '0' and order_seq == '0'">
+        </when>
+        <when test="biz_id != '0' and order_seq == '0'">
+    and a.order_seq in (select order_seq from fcms_order_info where biz_id = ${biz_id})
+        </when>
+        <otherwise>
+    and a.order_seq = ${order_seq}
+        </otherwise>
+    </choose>
+    and a.location_cd = if(#{location_cd} = 'ALL', a.location_cd, #{location_cd})
+    and a.addr_province not in ('', '999')
+    group by a.addr_province
+     </select>
+
+<!-- resycmi12m12-devicePieChart -->
+     <select id="resycmi12m12-devicePieChart">
+    select a.device
+         , a.manufacture
+         , count(a.no) as cnt
+    from   app_log_suc a
+    <choose>
+        <when test="dateCd == 'Y'">
+    where a.rgst_yy = substring(#{rgst_ymd}, 1, 4)
+        </when>
+        <when test="dateCd == 'M'">
+    where a.rgst_mm = substring(#{rgst_ymd}, 1, 6)
+        </when>
+        <otherwise>
+    where a.rgst_ymd = #{rgst_ymd}
+        </otherwise>
+    </choose>
+    <choose>
+        <when test="biz_id == '0' and order_seq == '0'">
+        </when>
+        <when test="biz_id != '0' and order_seq == '0'">
+    and a.order_seq in (select order_seq from fcms_order_info where biz_id = ${biz_id})
+        </when>
+        <otherwise>
+    and a.order_seq = ${order_seq}
+        </otherwise>
+    </choose>
+    and a.location_cd = if(#{location_cd} = 'ALL', a.location_cd, #{location_cd})
+    and a.addr_province = if(#{addr_province} = 'ALL', a.addr_province, #{addr_province})
+    group by a.device, a.manufacture
+    order by cnt desc
+     </select>
+<!-- resycmi12m12-genderPieChart -->
+     <select id="resycmi12m12-genderPieChart">
+    select case when floor((year(now())-b.birth_dt) / 10) * 10 > 0
+                then concat(
+                        floor((year(now())-b.birth_dt) / 10) * 10
+                    , '대'
+                    , (case b.gender 
+                        when 'F' then ' 여성'
+                        when 'M' then ' 남성'
+                        else '기타'
+                        end
+                        )
+                        )
+                else '기타'
+            end as gender
+         , count(a.no) as cnt
+         , (case b.login_typ_cd
+            when 'E' then 'E-mail'
+            when 'F' then 'Facebook'
+            when 'P' then 'Phone'
+            else '기타'
+            end
+           ) as login_typ_cd
+    from   app_log_suc a
+         , app_user    b
+    <choose>
+        <when test="dateCd == 'Y'">
+    where a.rgst_yy = substring(#{rgst_ymd}, 1, 4)
+        </when>
+        <when test="dateCd == 'M'">
+    where a.rgst_mm = substring(#{rgst_ymd}, 1, 6)
+        </when>
+        <otherwise>
+    where a.rgst_ymd = #{rgst_ymd}
+        </otherwise>
+    </choose>
+    <choose>
+        <when test="biz_id == '0' and order_seq == '0'">
+        </when>
+        <when test="biz_id != '0' and order_seq == '0'">
+    and a.order_seq in (select order_seq from fcms_order_info where biz_id = ${biz_id})
+        </when>
+        <otherwise>
+    and a.order_seq = ${order_seq}
+        </otherwise>
+    </choose>
+    and a.app_user_id = b.app_user_id
+    and a.location_cd = if(#{location_cd} = 'ALL', a.location_cd, #{location_cd})
+    and a.addr_province = if(#{addr_province} = 'ALL', a.addr_province, #{addr_province})
+    and b.gender is not null
+    group by b.gender, b.login_typ_cd
+    order by cnt desc
+     </select>
+</mapper>

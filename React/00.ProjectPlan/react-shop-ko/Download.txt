@@ -1,0 +1,2 @@
+Drop-zone = npm i react-dropzone
+Multer = npm i multer

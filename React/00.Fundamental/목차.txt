@@ -1,0 +1,33 @@
+00. 설치 및 create-react-app
+01. js , css 
+02. 배포( Build )
+03. Component 만들기
+04. props
+05. react Developer Tool
+06. Component 분리
+07. State(객체 주입) , key
+08. Event (onClick , preventDefault)
+09. Event (bind(this) , setState)
+10. Event (onChangePage에 함수 만들고, Component에서 onClick이벤트에 this.props.onChangePage();)
+11. Create (CreateContent.js에서 form테그 안에 onsubmit속성안에 이벤트함수 안에 props.onSubmit에 e.target.title.value등 데이터를 넘겨주고 App쪽 onSubmit이 실행 되면 App쪽 onSubmit에서 title,desc파람 받고 this.state.contents.concat으로 contents를 추가해준 뒤에 this.setState에서 contents:this.state.contents로 setstate해 주면 끗)
+12. Update (App.js에 UpdateContent부분에 selected_id를 data라는 이름으로 주입, UpdateContent.js에서 constructor에서 props를 초기화 및 state 설정 해주고 form 안에 input에 onChange 해줌, var _contents = Array.from(this.state.contents);로 다시 state애들 가져와서 setState해준다. )
+13. Delete (window.confirm은 확인 누르면 true, 취소누르면 faulse되는 함수임,  splice(i,1) i로 부터 첫번째까지 지우겠다라는 뜻, )
+
+
+
+#######Props: 사용자한테 보여줄 것들
+#######Component: State들을 가지고 분리해서 편하게 한거
+#######State: Props와 구분해서 component안에서 보여주면 안 되는 내부 전선 같은 존재
+#######Event: (대충 심한 욕)
+
+@@@@ App.js : constructor에서 props초기화, state 설정(props로 쓸거지만 보여주지 않을 데이터들), render에서 props애들 만들고 금마들 다 state랑 연결, return할때 Component 뿌리면서 이벤트 처리
+@@@@ Component.js : HTML, App.js에 있는 이벤트함수들 실행
+@@@@ Props : 상위 App.js에서 하위 TOC.js라는 component에 데이타를 전달 할때는 data라는 props를 전달하고 TOC에서는 this.props로 사용하면 된다.
+@@@@ 
+
+&&&&& error : undefined props라는 건 아마 this.props로 가져오는 거일텐데 this가 bind안 돼 있어서 못 찾는 거임
+&&&&& debugger; : 쓸때만 쓰고 지우자
+&&&&& 타입 : Number(id) 이런 식으로 javascript에서 제공하는 변환을 사용 해서 타입을 맞춰 줘야 한다.
+&&&&& error : read only property라는 건 Component안에서 props값을 바꾸는건 금지 되어 있다.
+
+react의 장점 : reload를 하지 않아도 props나 state를 변경하면 해당 render함수들이 자동으로 다시 요청이 들어가서 역동적으로 실행을 할 수 있다.

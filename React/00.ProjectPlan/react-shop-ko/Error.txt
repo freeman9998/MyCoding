@@ -1,0 +1,2 @@
+root에서 npm install -> client에서 npm install -> root에서 npm run dev 하면 pcrypt어쩌고 나올 수 있음 
+=> npm i bcrypt@5.0.0

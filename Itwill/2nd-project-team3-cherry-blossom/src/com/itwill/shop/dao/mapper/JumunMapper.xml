@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.shop.dao.mapper.JumunMapper">
+
+
+<resultMap type="Jumun" id="selectAllByIdResultMap" autoMapping="true">
+	<result column="J_NO" property="j_no"/>
+	<collection property="jumun_detailList" ofType="Jumun_detail" autoMapping="true">
+		<association property="product" autoMapping="true" javaType="Product" ></association>
+	</collection>
+</resultMap>
+<resultMap type="Jumun" id="detailResultMap" autoMapping="true">
+	<collection property="jumun_detailList" ofType="Jumun_detail" autoMapping="true">
+		<association property="product" autoMapping="true" ></association>
+	</collection>
+</resultMap>
+<!-- 회원1명의 주문내역조회-->
+<select id="selectAllById"  parameterType="string" resultMap="selectAllByIdResultMap" >
+select j.*,jd.*,p.* from jumun_detail jd 
+join product p on jd.p_no=p.p_no
+join jumun j on jd.j_no=j.j_no 
+where j.user_id=#{user_id} order by j.j_no
+
+</select>
+
+
+<!-- 주문생성 -->
+<insert id="insertJumun" parameterType="Jumun">
+		insert into jumun(j_no,j_date,j_price,j_status,j_payment,user_id) values (jumun_j_no_SEQ.nextval,sysdate,#{j_price},#{j_status},#{j_payment},#{user_id})
+</insert>
+
+<!-- 주문디테일생성 -->
+<insert id="insertJumunDetail" parameterType="Jumun_detail">
+      insert into jumun_detail(jd_no,jd_qty,j_no,p_no) values(jumun_detail_jd_no_SEQ.nextval,#{jd_qty},jumun_j_no_SEQ.currval,#{p_no})
+</insert>
+
+<!-- 주문디테일 보 기  -->
+<select id="detail" parameterType="int" resultMap="detailResultMap">
+select d.*,j.*,p.* from jumun j join jumun_detail d on j.j_no=d.j_no join product p on d.p_no=p.p_no 
+where j.j_no=#{j_no}
+</select>
+</mapper>

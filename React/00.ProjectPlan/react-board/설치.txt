@@ -1,0 +1,15 @@
+Node.js = https://nodejs.org/ko/
+MongoDB = https://www.mongodb.com/try/download/community
+Visual Studio Code = https://code.visualstudio.com/
+
+React-Bootstrap = npm u react-bootstrap bootstrap
+
+nodemon = npm i nodemon
+express = npm i express
+react-router-dom = npm i react-router-dom
+
+
+* axios = ajax 비동기 통신
+* cors = 동일기원이 아닌 uri동작을 원래는 보안상 막아주는데 그걸 풀어주기 위함
+* npm init으로 package.json을 만들고 scripts에 "start" : "nodemon server" 추가 (nodemon이라는 모듈로 server라는 파일을 실행)
+* nodemon = 서버가 자동으로 데이터가 수정되면 서버가 내려갔다가 올라옴 자동새로고침

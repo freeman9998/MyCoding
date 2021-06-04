@@ -1,0 +1,228 @@
+/*****************************
+  Footer
+*****************************/
+.footer {
+	margin: 0 60px;
+
+	.title {
+		font-size: 11px;
+		text-transform: uppercase;
+		font-weight: 700;
+		line-height: 1;
+		letter-spacing: 1px;
+		margin-bottom: 30px;
+	}
+
+	.small {
+		letter-spacing: 0.5px;
+	}
+
+	.footer-link {
+		display: flex;
+
+		ul {
+			padding-right: 50px;
+
+			&:last-child {
+				padding-right: 0px;
+			}
+
+			li {
+				a {
+					font-size: 11px;
+					line-height: 1;
+					color: $gray-3;
+					padding: 6px 0px;
+					display: block;
+				}
+
+				&:hover {
+					a {
+						color: $primary;
+					}
+
+				}
+
+				&:first-child {
+					a {
+						padding-top: 0;
+					}
+
+				}
+
+				&:last-child {
+					a {
+						padding-bottom: 0;
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+	.copyright {
+		padding: 40px 0;
+
+		a {
+			color: $gray-3;
+
+			&:hover {
+				color: $primary;
+			}
+
+		}
+
+	}
+
+}
+
+/* Social icon */
+.social-icon {
+	margin-top: 35px;
+
+	li {
+		display: inline-block;
+		margin-right: 25px;
+
+		&:last-child {
+			margin-right: 0;
+		}
+
+		a {
+			font-size: 18px;
+			color: $black;
+		}
+
+		&:hover {
+			a {
+				color: $primary;
+			}
+
+		}
+
+	}
+
+}
+
+/* subscribe */
+.footer-subscribe {
+	form {
+		.form-group {
+			.form-control {
+				background: rgba($white, 0.2);
+				border: 1px solid rgba($white, 0.02);
+				color: $white;
+			}
+
+			.form-control:-moz-placeholder {
+				color: $white;
+			}
+
+			.form-control:-ms-input-placeholder {
+				color: $white;
+			}
+
+			.form-control:-webkit-input-placeholder {
+				color: $white;
+			}
+
+		}
+
+	}
+
+}
+
+/* Footer 02 */
+.footer.footer-02 {
+	padding: 30px 0px 80px;
+	margin: 0;
+
+	.title {
+		color: $white;
+	}
+
+	.social-icon {
+		li {
+			a {
+				color: $white;
+
+				&:hover {
+					color: $primary;
+				}
+
+			}
+
+		}
+
+	}
+
+	.form-inline {
+		.btn {
+			background: inherit;
+			color: $black;
+
+			&:hover {
+				color: $primary;
+			}
+
+		}
+
+	}
+
+}
+
+/*****************************
+  Responsive
+*****************************/
+@media (max-width:991px) {
+	.footer {
+		.social-icon {
+			li {
+				margin-right: 30px;
+			}
+
+		}
+
+	}
+
+}
+
+@media (max-width:767px) {
+	.footer {
+		margin: 0 30px;
+		.social-icon {
+			li {
+				margin-right: 20px;
+			}
+		}
+	}
+
+	.footer.footer-02{
+		padding: 30px 0px 30px;
+	}
+}
+
+@media (max-width:575px) {
+	.footer {
+		margin: 0 15px;
+		.title {
+			margin-bottom: 20px;
+		}
+		.footer-link {
+			display: inline-block;
+			ul {
+				margin-right: 0;
+			}
+		}
+		.social-icon {
+			margin-top: 15px;
+		}
+  .copyright{
+  	padding: 30px 0; 
+  }
+	}
+
+}

@@ -1,0 +1,153 @@
+/*****************************
+  Shortcodes
+*****************************/
+
+/*****************************
+  Accordion
+*****************************/
+
+.card {
+	border: none;
+	margin-bottom: 10px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+}
+
+.card-header {
+	background: none;
+	padding: 0;
+	border-bottom: none;
+}
+
+.accordion {
+	>.card {
+		.card-header {
+			margin-bottom: 0;
+
+			.btn {
+				text-align: left;
+				font-size: 16px;
+				line-height: 24px;
+				padding: 11px 45px 11px 26px;
+				font-weight: bold;
+				display: inline-block;
+				width: 100%;
+				text-transform: capitalize;
+
+				&:after {
+					font-family: "Font Awesome 5 Free";
+					position: absolute;
+					top: 12px;
+					right: 25px;
+					transition: all 0.3s ease-in-out;
+					font-weight: 600;
+				}
+
+			}
+
+			.btn.collapsed {
+				background: none;
+				color: $gray-9;
+			}
+
+		}
+
+	}
+
+}
+
+.card-body {
+	padding: 20px 26px;
+}
+
+/* Accordion 1 */
+.accordion-style-1 {
+	>.card {
+		.card-header {
+			.btn {
+				text-transform: capitalize;
+				padding: 8px 0px 8px 28px;
+				line-height: 26px;
+				letter-spacing: 0.4px;
+			}
+
+			.payment-methods {
+				.custom-control-label {
+					&:before {
+						top: 15px;
+					}
+
+					&:after {
+						top: 15px;
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+}
+
+/* Accordion 2 */
+.accordion-style-2 {
+	>.card {
+		border-radius: inherit;
+		border: 1px solid $border-color;
+		border-bottom: 1px solid $border-color !important;
+		margin-bottom: 20px;
+
+		.card-header {
+			.btn {
+				background: $black;
+				color: $white;
+				font-weight: 400;
+				letter-spacing: 0px;
+
+				&:after {
+					content: "\f077";
+				}
+
+			}
+
+			.btn.collapsed {
+				color: $gray-3;
+
+				&:after {
+					content: "\f078";
+				}
+
+			}
+
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+	}
+
+}
+
+/*****************************
+  Responsive
+*****************************/
+
+@media (max-width:575px) {
+	.accordion{
+	>.card {
+   .card-header{
+   	 .btn{
+   	 	font-size: 14px;
+   	 	line-height: 22px;
+   	 	padding: 10px 40px 10px 25px;
+   	 }
+     }
+  	}
+  }
+ }

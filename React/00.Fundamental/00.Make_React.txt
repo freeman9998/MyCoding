@@ -1,0 +1,6 @@
+1. node.js Download (node.js -v)
+2. Visual Studio Download 
+3. npm install -g create-react-app (create-react-app -V)
+4. create folder(Dont naming to react)
+5. cd folder and create-react-app . 
+6. open 

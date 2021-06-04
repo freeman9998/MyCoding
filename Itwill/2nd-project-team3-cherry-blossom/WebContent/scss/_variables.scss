@@ -1,0 +1,37 @@
+// Font family
+$font-base: 		'Heebo', sans-serif;
+$font-hedding:	'Heebo', sans-serif;
+
+// Colors
+$body-color:	  #999999;
+$primary:				#fe6c61;
+$white:					#ffffff;
+$gray-1: 				#f5f5f5; 	// BG Light
+$gray-2: 				#cccccc;
+$gray-3: 				#999999; 	// Body Text
+$gray-4: 				#666666;
+$gray-5: 				#eeeeee;
+$gray-6: 				#111111;
+$gray-7: 				#1b1b29;
+$gray-8: 				#fe6c61;
+$gray-9: 				#333333;
+$black:  				#000000;
+
+// Border color
+$border-color: 	        #f5f5f5;
+$border-color-2: 	    #999999;
+$border-color-3: 	    #fe6c61;
+
+// For button and input border radius
+$border-radius-0:       0px;
+$border-radius-xs:      1px;
+$border-radius-sm:      2px;
+$border-radius-md:      3px;
+$border-radius-lg:      4px;
+$border-radius-xl:      5px;
+$border-radius-round:   100px;
+
+// Box shadow sizes
+$box-shadow:            0px 0px 20px rgba($black, 0.06);
+$box-shadow-sm:         0px 4px 8px rgba($black, 0.07);
+$box-shadow-lg:         0px 4px 13px rgba($black, 0.05);

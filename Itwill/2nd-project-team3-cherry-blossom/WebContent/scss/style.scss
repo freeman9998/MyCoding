@@ -1,0 +1,101 @@
+/*
+
+Template: Flexor - E-commerce HTML5 Template
+Version: 1.0.0
+Author: potenzaglobalsolutions
+Design and Developed by: potenzaglobalsolutions.com
+
+NOTE: This is main stylesheet of template, This file contains the styling for the actual Template.
+
+*/
+
+/*================================================
+[  Table of contents  ]
+================================================
+
+ :: Typography
+ :: Helper Classes
+ :: Shortcodes
+    - Accordion
+    - Button
+    - Countdown
+    - Category
+    - Counter
+    - Datetimepicker
+    - Feature info
+    - List
+    - Owl carousel
+    - Range slider
+    - Select Dropdown
+    - Tab style
+    - Team
+    - Testimonial
+    - Service
+ :: Header
+   - Header Style 01
+   - Header Style 02
+   - Header Style 03
+   - Header Style 04
+   - Header Style 05
+ :: Banner
+   - Banner 01
+   - Banner 02
+   - Banner 03
+   - Banner 04
+   - Banner 05
+   - Banner 06
+   - Banner 07
+   - Banner 08
+   - Banner 09
+   - Banner 10
+   - Banner 11
+ :: Layout
+   - Section Title
+   - Client Logo
+   - Back To Top
+   - Typography
+ :: Blog
+   - Blog Post Style 01
+   - Blog Post Style 02
+ :: Shop
+   - Shop
+   - Sidebar
+ :: Not Found
+ :: Footer
+
+======================================
+[ End table content ]
+======================================*/
+
+// Core files
+@import "variables";
+@import "typography";
+@import "helpers";
+
+// Shortcodes
+@import "shortcodes/button";
+@import "shortcodes/accordion";
+@import "shortcodes/list";
+@import "shortcodes/feature-info";
+@import "shortcodes/team";
+@import "shortcodes/testimonial";
+@import "shortcodes/counter";
+@import "shortcodes/countdown";
+@import "shortcodes/category";
+@import "shortcodes/tabs";
+@import "shortcodes/owl-carousel";
+@import "shortcodes/datetimepicker";
+@import "shortcodes/select";
+@import "shortcodes/range-slider";
+
+// Structure
+@import "header";
+@import "sidebar";
+@import "banner";
+@import "layout";
+
+// Pages
+@import "blog";
+@import "shop";
+@import "error";
+@import "footer";

@@ -1,0 +1,6 @@
+## 배포
+npm run build
+## serve라는 명령어로 어디서든 웹서버를 실행 할 수 있음
+npm install -g serve 
+npx serve -s build
+

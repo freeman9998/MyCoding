@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="resycmi12m09">
+<!--bizList-->
+<select id="bizList">
+/* bizList */
+SELECT b.biz_id
+     , b.biz_name
+     , b.country_cd
+     , (SELECT CONCAT('http://202.134.19.100:8080/'
+                    , comm_cd_val_desc
+                    , SUBSTRING_INDEX(SUBSTRING_INDEX(fa.server_fullname, comm.comm_cd_val_nm, -1), fa.filename_map, 1)
+                    , fa.filename_map) imgList
+        FROM   fcms_fileattach fa
+            , (SELECT comm_cd_val_nm, comm_cd_val_desc
+               FROM   fcms_comm_cd_dtl
+               WHERE  comm_cd_id       = 'FTP_SERVER_DIR'
+               AND    comm_cd_val_desc = 'detail'
+              ) comm        
+        WHERE  fa.groupuuid = b.logo_uuid
+       ) AS biz_logo_img_url
+     , (SELECT COUNT(d.no)
+        FROM   app_log_suc d
+        WHERE  d.order_seq IN (SELECT order_seq
+                               FROM   fcms_order_info
+                               WHERE  biz_id = b.biz_id
+                               )
+        AND    d.location_cd   NOT IN ('', 'ZZ')
+        AND    d.addr_province NOT IN ('', '999')
+        AND    d.addr_city     NOT IN ('', '999')
+<choose>
+<when test="date_cd == 'Y'">
+        AND    rgst_yy = #{rgst_yy}
+</when>
+<otherwise>
+        AND    rgst_yy = #{rgst_yy}
+        AND    rgst_mm = #{rgst_mm}
+</otherwise>
+</choose>
+       ) AS detect_cnt
+FROM   (SELECT biz_id, auth_cd, country_cd
+        FROM   fcms_user_info
+        WHERE  user_id = ${user_id}
+       ) a
+     , fcms_biz_info b
+WHERE  b.biz_id     = IF(a.auth_cd = 'AU00', b.biz_id, a.biz_id)
+AND    b.country_cd = a.country_cd
+ORDER BY b.biz_id
+</select>
+
+<!--orderList-->
+<select id="orderList">
+/* orderList */
+SELECT c.order_seq
+     , b.biz_id
+     , c.prod_nm
+     , c.country_cd
+     , (SELECT CONCAT('http://202.134.19.100:8080/'
+                    , comm_cd_val_desc
+                    , SUBSTRING_INDEX(SUBSTRING_INDEX(fa.server_fullname, comm.comm_cd_val_nm, -1), fa.filename_map, 1)
+                    , fa.filename_map) imgList
+        FROM   fcms_fileattach fa
+            , (SELECT comm_cd_val_nm, comm_cd_val_desc
+               FROM   fcms_comm_cd_dtl
+               WHERE  comm_cd_id       = 'FTP_SERVER_DIR'
+               AND    comm_cd_val_desc = 'detail'
+              ) comm        
+        WHERE  fa.groupuuid = c.biz_logo_uuid
+        LIMIT 1
+       ) AS order_logo_img_url
+     , (SELECT COUNT(d.no)
+        FROM   app_log_suc d
+        WHERE  d.order_seq = c.order_seq
+        AND    d.location_cd   NOT IN ('', 'ZZ')
+        AND    d.addr_province NOT IN ('', '999')
+        AND    d.addr_city     NOT IN ('', '999')
+<choose>
+<when test="date_cd == 'Y'">
+        AND    rgst_yy = #{rgst_yy}
+</when>
+<otherwise>
+        AND    rgst_yy = #{rgst_yy}
+        AND    rgst_mm = #{rgst_mm}
+</otherwise>
+</choose>
+       ) AS detect_cnt
+FROM   (SELECT biz_id, auth_cd, country_cd
+        FROM   fcms_user_info
+        WHERE  user_id = ${user_id}
+       ) a
+     , fcms_biz_info b
+     , fcms_order_info c
+<choose>
+<when test="auth_cd != 'AU00'">
+WHERE  b.biz_id     = a.biz_id
+</when>
+<otherwise>
+<choose>
+<when test="biz_id.length == 0">
+WHERE  1 = 2
+</when>
+<otherwise>
+WHERE  b.biz_id IN
+<foreach collection="biz_id" item="item" index="index"  open="(" close=")" separator=",">
+${item}
+</foreach>
+</otherwise>
+</choose>
+</otherwise>
+</choose>
+AND    c.biz_id     = b.biz_id
+AND    c.country_cd = b.country_cd
+ORDER BY b.biz_id
+</select>
+
+<!-- worldGeoChart -->
+<select id="worldGeoList">
+/* worldGeoChart */
+SELECT location_cd AS col1
+     , COUNT(no)   AS col2
+FROM   app_log_suc
+<choose>
+<when test="date_cd == 'Y'">
+WHERE  rgst_yy = #{rgst_yy}
+</when>
+<otherwise>
+WHERE  rgst_yy = #{rgst_yy}
+AND    rgst_mm = #{rgst_mm}
+</otherwise>
+</choose>
+AND    location_cd   NOT IN ('', 'ZZ')
+AND    addr_province NOT IN ('', '999')
+AND    addr_city     NOT IN ('', '999')
+<choose>
+<when test="biz_id.length != 0 and order_seq.length == 0">
+AND    order_seq IN (SELECT b.order_seq
+                     FROM   fcms_order_info b 
+                     WHERE  biz_id IN
+<foreach collection="biz_id" item="item" index="index"  open="(" close=")" separator=",">
+${item}
+</foreach>
+)
+</when>
+<when test="biz_id.length == 0 and order_seq.length == 0">
+AND    1 = 2
+</when>
+<otherwise>
+AND    order_seq IN
+<foreach collection="order_seq" item="item" index="index"  open="(" close=")" separator=",">
+${item}
+</foreach>
+</otherwise>
+</choose>
+GROUP BY location_cd
+ORDER BY col2 DESC
+</select>
+
+<!-- regionGeoList -->
+<select id="regionGeoList">
+/* regionGeoList */
+SELECT a.addr_city     AS col1
+     , count(a.no)     AS col2
+FROM   app_log_suc a
+<choose>
+<when test="date_cd == 'Y'">
+WHERE  a.rgst_yy = #{rgst_yy}
+</when>
+<otherwise>
+WHERE  a.rgst_yy = #{rgst_yy}
+AND    a.rgst_mm = #{rgst_mm}
+</otherwise>
+</choose>
+AND    a.location_cd = #{location_cd}
+AND    a.addr_province NOT IN ('', '999')
+AND    a.addr_city     NOT IN ('', '999')
+<choose>
+<when test="biz_id.length != 0 and order_seq.length == 0">
+AND    a.order_seq IN (SELECT b.order_seq
+                       FROM   fcms_order_info b 
+                       WHERE  biz_id IN
+<foreach collection="biz_id" item="item" index="index"  open="(" close=")" separator=",">
+${item}
+</foreach>
+)
+</when>
+<when test="biz_id.length == 0 and order_seq.length == 0">
+AND    1 = 2
+</when>
+<otherwise>
+AND    a.order_seq IN
+<foreach collection="order_seq" item="item" index="index"  open="(" close=")" separator=",">
+${item}
+</foreach>
+</otherwise>
+</choose>
+group by a.addr_province, a.addr_city
+</select>
+
+<!-- devicePieList -->
+<select id="devicePieList">
+/* devicePieList */
+SELECT a.device      AS col1
+     , count(a.no)   AS col2
+     , a.manufacture AS col3
+FROM   app_log_suc a
+<choose>
+<when test="date_cd == 'Y'">
+WHERE  a.rgst_yy = #{rgst_yy}
+</when>
+<otherwise>
+WHERE  a.rgst_yy = #{rgst_yy}
+AND    a.rgst_mm = #{rgst_mm}
+</otherwise>
+</choose>
+AND    a.location_cd = #{location_cd}
+AND    a.addr_province NOT IN ('', '999')
+AND    a.addr_city     NOT IN ('', '999')
+<if test="addr_city.length > 0">
+AND    a.addr_city   = #{addr_city}
+</if>
+<choose>
+<when test="biz_id.length != 0 and order_seq.length == 0">
+AND    a.order_seq IN (SELECT b.order_seq
+                       FROM   fcms_order_info b 
+                       WHERE  biz_id IN
+<foreach collection="biz_id" item="item" index="index"  open="(" close=")" separator=",">
+${item}
+</foreach>
+)
+</when>
+<when test="biz_id.length == 0 and order_seq.length == 0">
+AND    1 = 2
+</when>
+<otherwise>
+AND    a.order_seq IN
+<foreach collection="order_seq" item="item" index="index"  open="(" close=")" separator=",">
+${item}
+</foreach>
+</otherwise>
+</choose>
+GROUP BY a.device, a.manufacture
+ORDER BY col3 DESC
+</select>
+
+<!-- genderPieList -->
+<select id="genderPieList">
+/* genderPieList */
+SELECT CASE WHEN FLOOR((year(NOW())-b.birth_dt) / 10) * 10 > 0
+            THEN CONCAT(
+                   (SELECT comm_cd_val_nm
+                    FROM   fcms_comm_cd_dtl
+                    WHERE  comm_cd_id = 'AGE_CL'
+                    AND    comm_cd_val = FLOOR((year(NOW())-b.birth_dt) / 10) * 10
+                    AND    country_cd = #{lan_cd}
+                   )
+                 , (CASE #{lan_cd}
+                    WHEN 'KR' THEN CASE b.gender WHEN 'F' THEN ' 여성' WHEN 'M' THEN ' 남성' ELSE '' END
+                    WHEN 'VN' THEN CASE b.gender WHEN 'F' THEN ' nữ' WHEN 'M' THEN ' Nam giới' ELSE '' END
+                    WHEN 'US' THEN CASE b.gender WHEN 'F' THEN ' Femal' WHEN 'M' THEN ' Male' ELSE '' END
+                    ELSE ''
+                    END
+                   )
+               )
+           ELSE CASE #{lan_cd}
+                WHEN 'KR' THEN '기타'
+                WHEN 'VN' THEN 'Vân vân'
+                WHEN 'US' THEN 'ETC'
+                ELSE '기타'
+                END
+       END AS col1
+     , COUNT(a.no) AS col2
+FROM   app_log_suc a
+     , app_user    b
+<choose>
+<when test="date_cd == 'Y'">
+WHERE  a.rgst_yy = #{rgst_yy}
+</when>
+<otherwise>
+WHERE  a.rgst_yy = #{rgst_yy}
+AND    a.rgst_mm = #{rgst_mm}
+</otherwise>
+</choose>
+AND    a.app_user_id = b.app_user_id
+AND    a.location_cd = #{location_cd}
+AND    a.addr_province NOT IN ('', '999')
+AND    a.addr_city     NOT IN ('', '999')
+<if test="addr_city.length > 0">
+AND    a.addr_city   = #{addr_city}
+</if>
+<choose>
+<when test="biz_id.length != 0 and order_seq.length == 0">
+AND    a.order_seq IN (SELECT b.order_seq
+                       FROM   fcms_order_info b 
+                       WHERE  biz_id IN
+<foreach collection="biz_id" item="item" index="index"  open="(" close=")" separator=",">
+${item}
+</foreach>
+)
+</when>
+<when test="biz_id.length == 0 and order_seq.length == 0">
+AND    1 = 2
+</when>
+<otherwise>
+AND    a.order_seq IN
+<foreach collection="order_seq" item="item" index="index"  open="(" close=")" separator=",">
+${item}
+</foreach>
+</otherwise>
+</choose>
+GROUP BY b.gender
+ORDER BY col2 desc
+</select>
+
+<!--orderListBySort-->
+<select id="orderListBySort">
+/* orderListBySort */
+SELECT a.order_seq
+     , a.prod_nm
+FROM   fcms_order_info a
+<choose>
+<when test="biz_id.length != 0 and order_seq.length == 0">
+WHERE  a.order_seq IN (SELECT b.order_seq
+                       FROM   fcms_order_info b 
+                       WHERE  b.biz_id IN
+<foreach collection="biz_id" item="item" index="index"  open="(" close=")" separator=",">
+${item}
+</foreach>
+)
+</when>
+<when test="biz_id.length == 0 and order_seq.length == 0">
+WHERE  1 = 2
+</when>
+<otherwise>
+WHERE  a.order_seq IN
+<foreach collection="order_seq" item="item" index="index"  open="(" close=")" separator=",">
+${item}
+</foreach>
+</otherwise>
+</choose>
+ORDER BY a.order_seq
+</select>
+
+<!--monthlyOrderCnt-->
+<select id="monthlyOrderCnt">
+/* monthlyOrderCnt */
+SELECT t1.order_seq
+     , COUNT(t2.no) AS cnt
+FROM   (SELECT a.order_seq, a.prod_nm
+	   FROM   fcms_order_info a
+<choose>
+<when test="biz_id.length != 0 and order_seq.length == 0">
+WHERE  a.order_seq IN (SELECT b.order_seq
+                       FROM   fcms_order_info b 
+                       WHERE  b.biz_id IN
+<foreach collection="biz_id" item="item" index="index"  open="(" close=")" separator=",">
+${item}
+</foreach>
+)
+</when>
+<when test="biz_id.length == 0 and order_seq.length == 0">
+WHERE  1 = 2
+</when>
+<otherwise>
+WHERE  a.order_seq IN
+<foreach collection="order_seq" item="item" index="index"  open="(" close=")" separator=",">
+${item}
+</foreach>
+</otherwise>
+</choose>
+       ) t1
+       LEFT JOIN
+       (SELECT a.no, a.order_seq, SUBSTR(a.rgst_ymd, 1, 6) AS rgst_ymd
+		FROM   app_log_suc a
+		WHERE  SUBSTR(a.rgst_ymd, 1, 6) = #{rgst_ymd}
+		AND    a.location_cd   NOT IN ('', 'ZZ')
+		AND    a.addr_province NOT IN ('', '999')
+		AND    a.addr_city     NOT IN ('', '999')
+       ) t2
+       ON t1.order_seq = t2.order_seq
+GROUP BY t1.order_seq, t2.rgst_ymd
+ORDER BY t1.order_seq
+</select>
+</mapper>
