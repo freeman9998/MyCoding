@@ -16,3 +16,5 @@ D. mybatis-config.xml 파일에 mapper설정
 E. GuestMapper.xml 파일 에 sql문작성
 	
 F. GuestDaoImplMyBatis 작성
+
+yes
