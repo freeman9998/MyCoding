@@ -1,0 +1,46 @@
+How to use Git hub
+-------------------------------------------------------------------------------------------------------------------------------------
+      - git config --global user.name freeman9998
+      - git config --global user.email freeman9998@naver.com
+        : use Git as freeman9998 ans freeman9998@naver.com in anywhere
+      - git clone address(HTTP)
+        : Bring them in GitHub to work
+      - git branch -M main  
+      - git remote add origin URL
+      - git push -u origin main
+-------------------------------------------------------------------------------------------------------------------------------------
+      - git add -> git commit -mdocument "name [memo]" -> git push
+        : Sending
+        tips)'git add .': all things adding
+             'git amend': modify commited messages
+      - git reset 
+        : git added things are back to stage area
+        tips) 'git reset --hard hash': back and delete all things after this moment
+      - git fetch -> git merge
+        : get the crash with another editers
+-------------------------------------------------------------------------------------------------------------------------------------
+      - git pull
+      - git push 
+-------------------------------------------------------------------------------------------------------------------------------------
+      - git branch : make develop branches
+        use) git branch develop : make develop branch
+             git checkout develop : changing to develop state not master
+      - git merge : merging with master branch
+        <git branch develop -> git checkout develop -> work -> git log(checking) -> git checkout master -> git merge develop -> push
+-------------------------------------------------------------------------------------------------------------------------------------
+      - git remote : checking the remote directory - usually 'origin'
+      - git remote add 'name' 'address' : add another directory
+      - git remote rename 'name' : renamed
+      - git remote -v : git remote status
+-------------------------------------------------------------------------------------------------------------------------------------
+      - git log
+      - git log --stat : How many lines are added in file
+      - git log -p -3 : check specific points commited things in three lines
+      - git log --pretty=oneline : show logs by pretty and oneline
+      - git log --pretty=format:"%h -> %an, %ar :%s" --graph : show Hash value and Author name , day made and subject for graph
+      - git log origin/master
+      - git merge ogrigin/master
+-------------------------------------------------------------------------------------------------------------------------------------
+      - git archive --format=zip master -o Master.zip : extracting source code only to use as zip form
+
+      - etc.. git status  
